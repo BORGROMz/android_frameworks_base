@@ -87,8 +87,7 @@ public:
     }
 };
 
-class DeferStateStruct : public PlaybackStateStruct {
-public:
+struct DeferStateStruct : public PlaybackStateStruct {
     DeferStateStruct(DeferredDisplayList& deferredList, OpenGLRenderer& renderer, int replayFlags)
             : PlaybackStateStruct(renderer, replayFlags, &(deferredList.mAllocator)),
             mDeferredList(deferredList) {}

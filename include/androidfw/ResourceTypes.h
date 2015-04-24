@@ -112,7 +112,7 @@ struct __assertChar16Size {
  *
  * The PNG chunk type is "npTc".
  */
-struct Res_png_9patch
+struct alignas(uintptr_t) Res_png_9patch
 {
     Res_png_9patch() : wasDeserialized(false), xDivsOffset(0),
                        yDivsOffset(0), colorsOffset(0) { }
@@ -247,8 +247,8 @@ enum {
 #define Res_MAKEINTERNAL(entry) (0x01000000 | (entry&0xFFFF))
 #define Res_MAKEARRAY(entry) (0x02000000 | (entry&0xFFFF))
 
-#define Res_MAXPACKAGE 255
-#define Res_MAXTYPE 255
+static const size_t Res_MAXPACKAGE = 255;
+static const size_t Res_MAXTYPE = 255;
 
 /**
  * Representation of a value in a resource, supplying type
@@ -372,7 +372,8 @@ struct Res_value
     };
 
     // The data for this item, as interpreted according to dataType.
-    uint32_t data;
+    typedef uint32_t data_type;
+    data_type data;
 
     void copyFrom_dtoh(const Res_value& src);
 };
@@ -1502,6 +1503,8 @@ private:
     KeyedVector<String16, uint8_t>  mEntries;
 };
 
+bool U16StringToInt(const char16_t* s, size_t len, Res_value* outValue);
+
 /**
  * Convenience class for accessing data in a ResTable resource.
  */
@@ -1793,9 +1796,7 @@ public:
             const char* targetPath, const char* overlayPath,
             void** outData, size_t* outSize) const;
 
-    enum {
-        IDMAP_HEADER_SIZE_BYTES = 4 * sizeof(uint32_t) + 2 * 256,
-    };
+    static const size_t IDMAP_HEADER_SIZE_BYTES = 4 * sizeof(uint32_t) + 2 * 256;
 
     // Retrieve idmap meta-data.
     //

@@ -15,15 +15,11 @@
 #include "android_nio_utils.h"
 #include "CreateJavaOutputStreamAdaptor.h"
 
+#include "core_jni_helpers.h"
+
 #include <jni.h>
 
 #include <ResourceCache.h>
-
-#if 0
-    #define TRACE_BITMAP(code)  code
-#else
-    #define TRACE_BITMAP(code)
-#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // Conversions to/from SkColor, for get/setPixels, and the create method, which
@@ -43,8 +39,11 @@ static void FromColor_D32(void* dst, const SkColor src[], int width,
 
 static void FromColor_D32_Raw(void* dst, const SkColor src[], int width,
                           int, int) {
+    // Needed to thwart the unreachable code detection from clang.
+    static const bool sk_color_ne_zero = SK_COLOR_MATCHES_PMCOLOR_BYTE_ORDER;
+
     // SkColor's ordering may be different from SkPMColor
-    if (SK_COLOR_MATCHES_PMCOLOR_BYTE_ORDER) {
+    if (sk_color_ne_zero) {
         memcpy(dst, src, width * sizeof(SkColor));
         return;
     }
@@ -873,8 +872,6 @@ static void Bitmap_prepareToDraw(JNIEnv* env, jobject, jlong bitmapHandle) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-#include <android_runtime/AndroidRuntime.h>
-
 static JNINativeMethod gBitmapMethods[] = {
     {   "nativeCreate",             "([IIIIIIZ)Landroid/graphics/Bitmap;",
         (void*)Bitmap_creator },
@@ -914,10 +911,8 @@ static JNINativeMethod gBitmapMethods[] = {
     {   "nativePrepareToDraw",      "(J)V", (void*)Bitmap_prepareToDraw },
 };
 
-#define kClassPathName  "android/graphics/Bitmap"
-
 int register_android_graphics_Bitmap(JNIEnv* env)
 {
-    return android::AndroidRuntime::registerNativeMethods(env, kClassPathName,
-                                gBitmapMethods, SK_ARRAY_COUNT(gBitmapMethods));
+    return android::RegisterMethodsOrDie(env, "android/graphics/Bitmap", gBitmapMethods,
+                                         NELEM(gBitmapMethods));
 }

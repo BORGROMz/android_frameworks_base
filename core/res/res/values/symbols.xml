@@ -412,6 +412,7 @@
   <java-symbol type="dimen" name="notification_badge_size" />
   <java-symbol type="dimen" name="immersive_mode_cling_width" />
   <java-symbol type="dimen" name="circular_display_mask_offset" />
+  <java-symbol type="dimen" name="accessibility_magnification_indicator_width" />
 
   <java-symbol type="string" name="add_account_button_label" />
   <java-symbol type="string" name="addToDictionary" />
@@ -708,7 +709,6 @@
   <java-symbol type="string" name="noon" />
   <java-symbol type="string" name="number_picker_increment_scroll_action" />
   <java-symbol type="string" name="number_picker_increment_scroll_mode" />
-  <java-symbol type="string" name="numeric_date_template" />
   <java-symbol type="string" name="old_app_action" />
   <java-symbol type="string" name="old_app_description" />
   <java-symbol type="string" name="older" />
@@ -1055,27 +1055,11 @@
   <java-symbol type="string" name="config_ethernet_tcp_buffers" />
   <java-symbol type="string" name="config_wifi_tcp_buffers" />
 
-  <java-symbol type="plurals" name="abbrev_in_num_days" />
-  <java-symbol type="plurals" name="abbrev_in_num_hours" />
-  <java-symbol type="plurals" name="abbrev_in_num_minutes" />
-  <java-symbol type="plurals" name="abbrev_in_num_seconds" />
-  <java-symbol type="plurals" name="abbrev_num_days_ago" />
-  <java-symbol type="plurals" name="abbrev_num_hours_ago" />
-  <java-symbol type="plurals" name="abbrev_num_minutes_ago" />
-  <java-symbol type="plurals" name="abbrev_num_seconds_ago" />
   <java-symbol type="plurals" name="duration_hours" />
   <java-symbol type="plurals" name="duration_minutes" />
   <java-symbol type="plurals" name="duration_seconds" />
-  <java-symbol type="plurals" name="in_num_days" />
-  <java-symbol type="plurals" name="in_num_hours" />
-  <java-symbol type="plurals" name="in_num_minutes" />
-  <java-symbol type="plurals" name="in_num_seconds" />
   <java-symbol type="plurals" name="last_num_days" />
   <java-symbol type="plurals" name="matches_found" />
-  <java-symbol type="plurals" name="num_days_ago" />
-  <java-symbol type="plurals" name="num_hours_ago" />
-  <java-symbol type="plurals" name="num_minutes_ago" />
-  <java-symbol type="plurals" name="num_seconds_ago" />
   <java-symbol type="plurals" name="restr_pin_countdown" />
   <java-symbol type="plurals" name="pinpuk_attempts" />
 
@@ -1527,6 +1511,7 @@
   <java-symbol type="string" name="global_action_silent_mode_on_status" />
   <java-symbol type="string" name="global_action_toggle_silent_mode" />
   <java-symbol type="string" name="global_action_lockdown" />
+  <java-symbol type="string" name="global_action_voice_assist" />
   <java-symbol type="string" name="invalidPuk" />
   <java-symbol type="string" name="lockscreen_carrier_default" />
   <java-symbol type="style" name="Animation.LockScreen" />
@@ -1584,6 +1569,7 @@
   <java-symbol type="bool" name="config_useAttentionLight" />
   <java-symbol type="bool" name="config_animateScreenLights" />
   <java-symbol type="bool" name="config_automatic_brightness_available" />
+  <java-symbol type="bool" name="config_autoBrightnessResetAmbientLuxAfterWarmUp" />
   <java-symbol type="bool" name="config_dozeAfterScreenOff" />
   <java-symbol type="bool" name="config_enableActivityRecognitionHardwareOverlay" />
   <java-symbol type="bool" name="config_enableFusedLocationOverlay" />
@@ -1614,6 +1600,7 @@
   <java-symbol type="drawable" name="ic_notification_ime_default" />
   <java-symbol type="drawable" name="ic_menu_refresh" />
   <java-symbol type="drawable" name="ic_settings" />
+  <java-symbol type="drawable" name="ic_voice_search" />
   <java-symbol type="drawable" name="stat_notify_car_mode" />
   <java-symbol type="drawable" name="stat_notify_disabled_data" />
   <java-symbol type="drawable" name="stat_notify_disk_full" />
@@ -1638,6 +1625,9 @@
   <java-symbol type="id" name="replace_message" />
   <java-symbol type="fraction" name="config_dimBehindFadeDuration" />
   <java-symbol type="fraction" name="config_screenAutoBrightnessDozeScaleFactor" />
+  <java-symbol type="integer" name="config_autoBrightnessBrighteningLightDebounce"/>
+  <java-symbol type="integer" name="config_autoBrightnessDarkeningLightDebounce"/>
+  <java-symbol type="integer" name="config_autoBrightnessLightSensorRate"/>
   <java-symbol type="integer" name="config_carDockKeepsScreenOn" />
   <java-symbol type="integer" name="config_criticalBatteryWarningLevel" />
   <java-symbol type="integer" name="config_datause_notification_type" />

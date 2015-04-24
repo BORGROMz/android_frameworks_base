@@ -1,5 +1,5 @@
-#ifndef GraphicsJNI_DEFINED
-#define GraphicsJNI_DEFINED
+#ifndef _ANDROID_GRAPHICS_GRAPHICS_JNI_H_
+#define _ANDROID_GRAPHICS_GRAPHICS_JNI_H_
 
 #include "SkBitmap.h"
 #include "SkDevice.h"
@@ -15,7 +15,7 @@ class SkCanvas;
 
 namespace android {
 class Paint;
-class TypefaceImpl;
+struct TypefaceImpl;
 }
 
 class GraphicsJNI {
@@ -160,7 +160,6 @@ public:
 
 private:
     JavaVM* fVM;
-    bool fAllocateInJavaHeap;
     jbyteArray fStorageObj;
     int fAllocCount;
 };
@@ -248,4 +247,4 @@ void doThrowIOE(JNIEnv* env, const char* msg = NULL);   // IO Exception
 #define NPE_CHECK_RETURN_VOID(env, object)    \
     do { if (NULL == (object)) { doThrowNPE(env); return; } } while (0)
 
-#endif
+#endif  // _ANDROID_GRAPHICS_GRAPHICS_JNI_H_

@@ -25,6 +25,8 @@
 #include <Interpolator.h>
 #include <RenderProperties.h>
 
+#include "core_jni_helpers.h"
+
 namespace android {
 
 using namespace uirenderer;
@@ -161,11 +163,6 @@ static void setStartDelay(JNIEnv* env, jobject clazz, jlong animatorPtr, jlong s
     animator->setStartDelay(startDelay);
 }
 
-static jlong getStartDelay(JNIEnv* env, jobject clazz, jlong animatorPtr) {
-    BaseRenderNodeAnimator* animator = reinterpret_cast<BaseRenderNodeAnimator*>(animatorPtr);
-    return static_cast<jlong>(animator->startDelay());
-}
-
 static void setInterpolator(JNIEnv* env, jobject clazz, jlong animatorPtr, jlong interpolatorPtr) {
     BaseRenderNodeAnimator* animator = reinterpret_cast<BaseRenderNodeAnimator*>(animatorPtr);
     Interpolator* interpolator = reinterpret_cast<Interpolator*>(interpolatorPtr);
@@ -218,25 +215,19 @@ static JNINativeMethod gMethods[] = {
 #endif
 };
 
-#define FIND_CLASS(var, className) \
-        var = env->FindClass(className); \
-        LOG_FATAL_IF(! var, "Unable to find class " className);
-
-#define GET_STATIC_METHOD_ID(var, clazz, methodName, methodDescriptor) \
-        var = env->GetStaticMethodID(clazz, methodName, methodDescriptor); \
-        LOG_FATAL_IF(! var, "Unable to find method " methodName);
-
 int register_android_view_RenderNodeAnimator(JNIEnv* env) {
 #ifdef USE_OPENGL_RENDERER
     sLifecycleChecker.incStrong(0);
 #endif
-    FIND_CLASS(gRenderNodeAnimatorClassInfo.clazz, kClassPathName);
-    gRenderNodeAnimatorClassInfo.clazz = jclass(env->NewGlobalRef(gRenderNodeAnimatorClassInfo.clazz));
+    gRenderNodeAnimatorClassInfo.clazz = FindClassOrDie(env, kClassPathName);
+    gRenderNodeAnimatorClassInfo.clazz = MakeGlobalRefOrDie(env,
+                                                            gRenderNodeAnimatorClassInfo.clazz);
 
-    GET_STATIC_METHOD_ID(gRenderNodeAnimatorClassInfo.callOnFinished, gRenderNodeAnimatorClassInfo.clazz,
-            "callOnFinished", "(Landroid/view/RenderNodeAnimator;)V");
+    gRenderNodeAnimatorClassInfo.callOnFinished = GetStaticMethodIDOrDie(
+            env, gRenderNodeAnimatorClassInfo.clazz, "callOnFinished",
+            "(Landroid/view/RenderNodeAnimator;)V");
 
-    return AndroidRuntime::registerNativeMethods(env, kClassPathName, gMethods, NELEM(gMethods));
+    return RegisterMethodsOrDie(env, kClassPathName, gMethods, NELEM(gMethods));
 }
 
 

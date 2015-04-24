@@ -76,9 +76,8 @@ import com.android.server.pm.PackageManagerService;
 import com.android.server.pm.UserManagerService;
 import com.google.android.collect.Lists;
 import com.google.android.collect.Maps;
+import libcore.util.HexEncoding;
 
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.DecoderException;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
@@ -892,8 +891,7 @@ class MountService extends IMountService.Stub
 
         // Temporary workaround for http://b/17945169.
         Slog.d(TAG, "Setting system properties to " + systemLocale + " from mount service");
-        SystemProperties.set("persist.sys.language", locale.getLanguage());
-        SystemProperties.set("persist.sys.country", locale.getCountry());
+        SystemProperties.set("persist.sys.locale", locale.toLanguageTag());
     }
 
     /**
@@ -2204,25 +2202,21 @@ class MountService extends IMountService.Stub
         }
     }
 
-    private String toHex(String password) {
+    private static String toHex(String password) {
         if (password == null) {
-            return new String();
+            return "";
         }
         byte[] bytes = password.getBytes(StandardCharsets.UTF_8);
-        return new String(Hex.encodeHex(bytes));
+        return new String(HexEncoding.encode(bytes));
     }
 
-    private String fromHex(String hexPassword) {
+    private static String fromHex(String hexPassword) throws IllegalArgumentException {
         if (hexPassword == null) {
             return null;
         }
 
-        try {
-            byte[] bytes = Hex.decodeHex(hexPassword.toCharArray());
-            return new String(bytes, StandardCharsets.UTF_8);
-        } catch (DecoderException e) {
-            return null;
-        }
+        final byte[] bytes = HexEncoding.decode(hexPassword.toCharArray(), false);
+        return new String(bytes, StandardCharsets.UTF_8);
     }
 
     @Override
@@ -2424,9 +2418,16 @@ class MountService extends IMountService.Stub
         final NativeDaemonEvent event;
         try {
             event = mConnector.execute("cryptfs", "getpw");
+            if ("-1".equals(event.getMessage())) {
+                // -1 equals no password
+                return null;
+            }
             return fromHex(event.getMessage());
         } catch (NativeDaemonConnectorException e) {
             throw e.rethrowAsParcelableException();
+        } catch (IllegalArgumentException e) {
+            Slog.e(TAG, "Invalid response to getPassword");
+            return null;
         }
     }
 

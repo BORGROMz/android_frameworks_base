@@ -212,7 +212,7 @@ void PathCache::removeTexture(PathTexture* texture) {
         // before attempting our cleanup
         const sp<Task<SkBitmap*> >& task = texture->task();
         if (task != NULL) {
-            SkBitmap* bitmap = task->getResult();
+            task->getResult();
             texture->clearTask();
         } else {
             // If there is a pending task, the path was not added
@@ -493,7 +493,9 @@ void PathCache::precache(const SkPath* path, const SkPaint* paint) {
         if (mProcessor == NULL) {
             mProcessor = new PathProcessor(Caches::getInstance());
         }
-        mProcessor->add(task);
+        if (!mProcessor->add(task)) {
+            mProcessor->process(task);
+        }
     }
 }
 

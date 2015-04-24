@@ -339,13 +339,19 @@ void RenderProxy::trimMemory(int level) {
     }
 }
 
+template <typename T>
+void UNUSED(T) {}
+
+
 CREATE_BRIDGE0(fence) {
     // Intentionally empty
+    UNUSED(args);
     return NULL;
 }
 
 void RenderProxy::fence() {
     SETUP_TASK(fence);
+    UNUSED(args);
     postAndWait(task);
 }
 
@@ -389,6 +395,7 @@ CREATE_BRIDGE1(outputLogBuffer, int fd) {
 }
 
 void RenderProxy::outputLogBuffer(int fd) {
+    if (!RenderThread::hasInstance()) return;
     SETUP_TASK(outputLogBuffer);
     args->fd = fd;
     staticPostAndWait(task);

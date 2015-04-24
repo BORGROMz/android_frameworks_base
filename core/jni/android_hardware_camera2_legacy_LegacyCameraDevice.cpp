@@ -23,7 +23,7 @@
 
 #include "jni.h"
 #include "JNIHelp.h"
-#include "android_runtime/AndroidRuntime.h"
+#include "core_jni_helpers.h"
 #include "android_runtime/android_view_Surface.h"
 #include "android_runtime/android_graphics_SurfaceTexture.h"
 
@@ -315,8 +315,8 @@ static status_t produceFrame(const sp<ANativeWindow>& anw,
         case HAL_PIXEL_FORMAT_BLOB: {
             int8_t* img = NULL;
             struct camera3_jpeg_blob footer = {
-                jpeg_blob_id: CAMERA3_JPEG_BLOB_ID,
-                jpeg_size: (uint32_t)bufferLength
+                .jpeg_blob_id = CAMERA3_JPEG_BLOB_ID,
+                .jpeg_size = (uint32_t)bufferLength
             };
 
             size_t totalJpegSize = bufferLength + sizeof(footer);
@@ -622,7 +622,7 @@ static jlong LegacyCameraDevice_nativeGetSurfaceId(JNIEnv* env, jobject thiz, jo
         ALOGE("%s: Could not retrieve IGraphicBufferProducer from surface.", __FUNCTION__);
         return 0;
     }
-    sp<IBinder> b = gbp->asBinder();
+    sp<IBinder> b = IInterface::asBinder(gbp);
     if (b == NULL) {
         ALOGE("%s: Could not retrieve IBinder from surface.", __FUNCTION__);
         return 0;
@@ -740,7 +740,7 @@ static JNINativeMethod gCameraDeviceMethods[] = {
 int register_android_hardware_camera2_legacy_LegacyCameraDevice(JNIEnv* env)
 {
     // Register native functions
-    return AndroidRuntime::registerNativeMethods(env,
+    return RegisterMethodsOrDie(env,
             CAMERA_DEVICE_CLASS_NAME,
             gCameraDeviceMethods,
             NELEM(gCameraDeviceMethods));

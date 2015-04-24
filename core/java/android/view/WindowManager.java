@@ -16,6 +16,7 @@
 
 package android.view;
 
+import android.annotation.SystemApi;
 import android.app.Presentation;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -1590,7 +1591,19 @@ public interface WindowManager extends ViewManager {
         public final CharSequence getTitle() {
             return mTitle;
         }
-    
+
+        /** @hide */
+        @SystemApi
+        public final void setUserActivityTimeout(long timeout) {
+            userActivityTimeout = timeout;
+        }
+
+        /** @hide */
+        @SystemApi
+        public final long getUserActivityTimeout() {
+            return userActivityTimeout;
+        }
+
         public int describeContents() {
             return 0;
         }
@@ -1966,7 +1979,8 @@ public interface WindowManager extends ViewManager {
             if (userActivityTimeout >= 0) {
                 sb.append(" userActivityTimeout=").append(userActivityTimeout);
             }
-            if (!surfaceInsets.equals(Insets.NONE)) {
+            if (surfaceInsets.left != 0 || surfaceInsets.top != 0 || surfaceInsets.right != 0 ||
+                    surfaceInsets.bottom != 0) {
                 sb.append(" surfaceInsets=").append(surfaceInsets);
             }
             if (needsMenuKey != NEEDS_MENU_UNSET) {

@@ -128,8 +128,8 @@ bool CanvasContext::pauseSurface(ANativeWindow* window) {
 }
 
 // TODO: don't pass viewport size, it's automatic via EGL
-void CanvasContext::setup(int width, int height, const Vector3& lightCenter, float lightRadius,
-        uint8_t ambientShadowAlpha, uint8_t spotShadowAlpha) {
+void CanvasContext::setup(int width, int height, const Vector3& lightCenter,
+        float lightRadius, uint8_t ambientShadowAlpha, uint8_t spotShadowAlpha) {
     if (!mCanvas) return;
     mCanvas->initLight(lightCenter, lightRadius, ambientShadowAlpha, spotShadowAlpha);
 }

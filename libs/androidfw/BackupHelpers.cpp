@@ -68,14 +68,11 @@ struct file_metadata_v1 {
 
 const static int CURRENT_METADATA_VERSION = 1;
 
-#if 1
-#define LOGP(f, x...)
-#else
+static const bool kIsDebug = false;
 #if TEST_BACKUP_HELPERS
-#define LOGP(f, x...) printf(f "\n", x)
+#define LOGP(f, x...) if (kIsDebug) printf(f "\n", x)
 #else
-#define LOGP(x...) ALOGD(x)
-#endif
+#define LOGP(x...) if (kIsDebug) ALOGD(x)
 #endif
 
 const static int ROUND_UP[4] = { 0, 3, 2, 1 };
@@ -445,18 +442,6 @@ back_up_files(int oldSnapshotFD, BackupDataWriter* dataStream, int newSnapshotFD
     return 0;
 }
 
-// Utility function, equivalent to stpcpy(): perform a strcpy, but instead of
-// returning the initial dest, return a pointer to the trailing NUL.
-static char* strcpy_ptr(char* dest, const char* str) {
-    if (dest && str) {
-        while ((*dest = *str) != 0) {
-            dest++;
-            str++;
-        }
-    }
-    return dest;
-}
-
 static void calc_tar_checksum(char* buf) {
     // [ 148 :   8 ] checksum -- to be calculated with this field as space chars
     memset(buf + 148, ' ', 8);
@@ -582,7 +567,7 @@ int write_tarfile(const String8& packageName, const String8& domain,
     snprintf(buf + 124, 12, "%011llo", (isdir) ? 0LL : s.st_size);
 
     // [ 136 :  12 ] last mod time as a UTC time_t
-    snprintf(buf + 136, 12, "%0lo", s.st_mtime);
+    snprintf(buf + 136, 12, "%0lo", (unsigned long)s.st_mtime);
 
     // [ 156 :   1 ] link/file type
     uint8_t type;
@@ -638,7 +623,6 @@ int write_tarfile(const String8& packageName, const String8& domain,
 
         // construct the pax extended header data block
         memset(paxData, 0, BUFSIZE - (paxData - buf));
-        int len;
 
         // size header -- calc len in digits by actually rendering the number
         // to a string - brute force but simple
@@ -1203,7 +1187,6 @@ test_read_header_and_entity(BackupDataReader& reader, const char* str)
     size_t bufSize = strlen(str)+1;
     char* buf = (char*)malloc(bufSize);
     String8 string;
-    int cookie = 0x11111111;
     size_t actualSize;
     bool done;
     int type;
@@ -1336,23 +1319,12 @@ get_mod_time(const char* filename, struct timeval times[2])
         fprintf(stderr, "stat '%s' failed: %s\n", filename, strerror(errno));
         return errno;
     }
-    times[0].tv_sec = st.st_atime;
-    times[1].tv_sec = st.st_mtime;
 
-    // If st_atime is a macro then struct stat64 uses struct timespec
-    // to store the access and modif time values and typically
-    // st_*time_nsec is not defined. In glibc, this is controlled by
-    // __USE_MISC.
-#ifdef __USE_MISC
-#if !defined(st_atime) || defined(st_atime_nsec)
-#error "Check if this __USE_MISC conditional is still needed."
-#endif
+    times[0].tv_sec = st.st_atim.tv_sec;
     times[0].tv_usec = st.st_atim.tv_nsec / 1000;
+
+    times[1].tv_sec = st.st_mtim.tv_sec;
     times[1].tv_usec = st.st_mtim.tv_nsec / 1000;
-#else
-    times[0].tv_usec = st.st_atime_nsec / 1000;
-    times[1].tv_usec = st.st_mtime_nsec / 1000;
-#endif
 
     return 0;
 }
@@ -1493,7 +1465,6 @@ int
 backup_helper_test_null_base()
 {
     int err;
-    int oldSnapshotFD;
     int dataStreamFD;
     int newSnapshotFD;
 
@@ -1542,7 +1513,6 @@ int
 backup_helper_test_missing_file()
 {
     int err;
-    int oldSnapshotFD;
     int dataStreamFD;
     int newSnapshotFD;
 

@@ -20,12 +20,12 @@
 #include <sys/mount.h>
 #include <linux/fs.h>
 
-#include <grp.h>
 #include <fcntl.h>
+#include <grp.h>
+#include <inttypes.h>
 #include <paths.h>
 #include <signal.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <sys/capability.h>
 #include <sys/personality.h>
 #include <sys/prctl.h>
@@ -34,7 +34,7 @@
 #include <sys/types.h>
 #include <sys/utsname.h>
 #include <sys/wait.h>
-
+#include <unistd.h>
 
 #include <cutils/fs.h>
 #include <cutils/multiuser.h>
@@ -43,9 +43,8 @@
 #include <utils/String8.h>
 #include <selinux/android.h>
 #include <processgroup/processgroup.h>
-#include <inttypes.h>
 
-#include "android_runtime/AndroidRuntime.h"
+#include "core_jni_helpers.h"
 #include "JNIHelp.h"
 #include "ScopedLocalRef.h"
 #include "ScopedPrimitiveArray.h"
@@ -105,7 +104,7 @@ static void SigChldHandler(int /*signal_number*/) {
     // so that it is restarted by init and system server will be restarted
     // from there.
     if (pid == gSystemServerPid) {
-      ALOGE("Exit zygote because system server (%d) has terminated");
+      ALOGE("Exit zygote because system server (%d) has terminated", pid);
       kill(getpid(), SIGKILL);
     }
   }
@@ -131,7 +130,7 @@ static void SetSigChldHandler() {
 
   int err = sigaction(SIGCHLD, &sa, NULL);
   if (err < 0) {
-    ALOGW("Error setting SIGCHLD handler: %d", errno);
+    ALOGW("Error setting SIGCHLD handler: %s", strerror(errno));
   }
 }
 
@@ -143,7 +142,7 @@ static void UnsetSigChldHandler() {
 
   int err = sigaction(SIGCHLD, &sa, NULL);
   if (err < 0) {
-    ALOGW("Error unsetting SIGCHLD handler: %d", errno);
+    ALOGW("Error unsetting SIGCHLD handler: %s", strerror(errno));
   }
 }
 
@@ -190,7 +189,8 @@ static void SetRLimits(JNIEnv* env, jobjectArray javaRlimits) {
 
     int rc = setrlimit(javaRlimit[0], &rlim);
     if (rc == -1) {
-      ALOGE("setrlimit(%d, {%d, %d}) failed", javaRlimit[0], rlim.rlim_cur, rlim.rlim_max);
+      ALOGE("setrlimit(%d, {%ld, %ld}) failed", javaRlimit[0], rlim.rlim_cur,
+            rlim.rlim_max);
       RuntimeAbort(env);
     }
   }
@@ -236,7 +236,7 @@ static void SetCapabilities(JNIEnv* env, int64_t permitted, int64_t effective) {
   capdata[1].permitted = permitted >> 32;
 
   if (capset(&capheader, &capdata[0]) == -1) {
-    ALOGE("capset(%lld, %lld) failed", permitted, effective);
+    ALOGE("capset(%" PRId64 ", %" PRId64 ") failed", permitted, effective);
     RuntimeAbort(env);
   }
 }
@@ -258,7 +258,7 @@ static bool MountEmulatedStorage(uid_t uid, jint mount_mode, bool force_mount_na
 
   // Create a second private mount namespace for our process
   if (unshare(CLONE_NEWNS) == -1) {
-      ALOGW("Failed to unshare(): %d", errno);
+      ALOGW("Failed to unshare(): %s", strerror(errno));
       return false;
   }
 
@@ -295,14 +295,15 @@ static bool MountEmulatedStorage(uid_t uid, jint mount_mode, bool force_mount_na
     if (mount_mode == MOUNT_EXTERNAL_MULTIUSER_ALL) {
       // Mount entire external storage tree for all users
       if (TEMP_FAILURE_RETRY(mount(source, target, NULL, MS_BIND, NULL)) == -1) {
-        ALOGW("Failed to mount %s to %s :%d", source, target, errno);
+        ALOGW("Failed to mount %s to %s: %s", source, target, strerror(errno));
         return false;
       }
     } else {
       // Only mount user-specific external storage
-      if (TEMP_FAILURE_RETRY(
-              mount(source_user.string(), target_user.string(), NULL, MS_BIND, NULL)) == -1) {
-        ALOGW("Failed to mount %s to %s: %d", source_user.string(), target_user.string(), errno);
+      if (TEMP_FAILURE_RETRY(mount(source_user.string(), target_user.string(), NULL,
+                                   MS_BIND, NULL)) == -1) {
+        ALOGW("Failed to mount %s to %s: %s", source_user.string(), target_user.string(),
+              strerror(errno));
         return false;
       }
     }
@@ -314,7 +315,7 @@ static bool MountEmulatedStorage(uid_t uid, jint mount_mode, bool force_mount_na
     // Finally, mount user-specific path into place for legacy users
     if (TEMP_FAILURE_RETRY(
             mount(target_user.string(), legacy, NULL, MS_BIND | MS_REC, NULL)) == -1) {
-      ALOGW("Failed to mount %s to %s: %d", target_user.string(), legacy, errno);
+      ALOGW("Failed to mount %s to %s: %s", target_user.string(), legacy, strerror(errno));
       return false;
     }
   } else {
@@ -365,13 +366,13 @@ static void DetachDescriptors(JNIEnv* env, jintArray fdsToClose) {
   for (i = 0; i < count; i++) {
     devnull = open("/dev/null", O_RDWR);
     if (devnull < 0) {
-      ALOGE("Failed to open /dev/null");
+      ALOGE("Failed to open /dev/null: %s", strerror(errno));
       RuntimeAbort(env);
       continue;
     }
-    ALOGV("Switching descriptor %d to /dev/null: %d", ar[i], errno);
+    ALOGV("Switching descriptor %d to /dev/null: %s", ar[i], strerror(errno));
     if (dup2(devnull, ar[i]) < 0) {
-      ALOGE("Failed dup2() on descriptor %d", ar[i]);
+      ALOGE("Failed dup2() on descriptor %d: %s", ar[i], strerror(errno));
       RuntimeAbort(env);
     }
     close(devnull);
@@ -401,23 +402,7 @@ void SetThreadName(const char* thread_name) {
   strlcpy(buf, s, sizeof(buf)-1);
   errno = pthread_setname_np(pthread_self(), buf);
   if (errno != 0) {
-    ALOGW("Unable to set the name of current thread to '%s'", buf);
-  }
-}
-
-  // Temporary timing check.
-uint64_t MsTime() {
-  timespec now;
-  clock_gettime(CLOCK_MONOTONIC, &now);
-  return static_cast<uint64_t>(now.tv_sec) * UINT64_C(1000) + now.tv_nsec / UINT64_C(1000000);
-}
-
-
-void ckTime(uint64_t start, const char* where) {
-  uint64_t now = MsTime();
-  if ((now-start) > 1000) {
-    // If we are taking more than a second, log about it.
-    ALOGW("Slow operation: %"PRIu64" ms in %s", (uint64_t)(now-start), where);
+    ALOGW("Unable to set the name of current thread to '%s': %s", buf, strerror(errno));
   }
 }
 
@@ -429,9 +414,7 @@ static pid_t ForkAndSpecializeCommon(JNIEnv* env, uid_t uid, gid_t gid, jintArra
                                      jstring java_se_info, jstring java_se_name,
                                      bool is_system_server, jintArray fdsToClose,
                                      jstring instructionSet, jstring dataDir) {
-  uint64_t start = MsTime();
   SetSigChldHandler();
-  ckTime(start, "ForkAndSpecializeCommon:SetSigChldHandler");
 
   pid_t pid = fork();
 
@@ -439,11 +422,8 @@ static pid_t ForkAndSpecializeCommon(JNIEnv* env, uid_t uid, gid_t gid, jintArra
     // The child process.
     gMallocLeakZygoteChild = 1;
 
-
     // Clean up any descriptors which must be closed immediately
     DetachDescriptors(env, fdsToClose);
-
-    ckTime(start, "ForkAndSpecializeCommon:Fork and detach");
 
     // Keep capabilities across UID change, unless we're staying root.
     if (uid != 0) {
@@ -504,13 +484,13 @@ static pid_t ForkAndSpecializeCommon(JNIEnv* env, uid_t uid, gid_t gid, jintArra
 
     int rc = setresgid(gid, gid, gid);
     if (rc == -1) {
-      ALOGE("setresgid(%d) failed", gid);
+      ALOGE("setresgid(%d) failed: %s", gid, strerror(errno));
       RuntimeAbort(env);
     }
 
     rc = setresuid(uid, uid, uid);
     if (rc == -1) {
-      ALOGE("setresuid(%d) failed", uid);
+      ALOGE("setresuid(%d) failed: %s", uid, strerror(errno));
       RuntimeAbort(env);
     }
 
@@ -519,7 +499,7 @@ static pid_t ForkAndSpecializeCommon(JNIEnv* env, uid_t uid, gid_t gid, jintArra
         int old_personality = personality(0xffffffff);
         int new_personality = personality(old_personality | ADDR_NO_RANDOMIZE);
         if (new_personality == -1) {
-            ALOGW("personality(%d) failed", new_personality);
+            ALOGW("personality(%d) failed: %s", new_personality, strerror(errno));
         }
     }
 
@@ -568,11 +548,8 @@ static pid_t ForkAndSpecializeCommon(JNIEnv* env, uid_t uid, gid_t gid, jintArra
 
     UnsetSigChldHandler();
 
-    ckTime(start, "ForkAndSpecializeCommon:child process setup");
-
     env->CallStaticVoidMethod(gZygoteClass, gCallPostForkChildHooks, debug_flags,
                               is_system_server ? NULL : instructionSet);
-    ckTime(start, "ForkAndSpecializeCommon:PostForkChildHooks returns");
     if (env->ExceptionCheck()) {
       ALOGE("Error calling post fork hooks.");
       RuntimeAbort(env);
@@ -636,15 +613,11 @@ static JNINativeMethod gMethods[] = {
 };
 
 int register_com_android_internal_os_Zygote(JNIEnv* env) {
-  gZygoteClass = (jclass) env->NewGlobalRef(env->FindClass(kZygoteClassName));
-  if (gZygoteClass == NULL) {
-    RuntimeAbort(env);
-  }
-  gCallPostForkChildHooks = env->GetStaticMethodID(gZygoteClass, "callPostForkChildHooks",
+  gZygoteClass = MakeGlobalRefOrDie(env, FindClassOrDie(env, kZygoteClassName));
+  gCallPostForkChildHooks = GetStaticMethodIDOrDie(env, gZygoteClass, "callPostForkChildHooks",
                                                    "(ILjava/lang/String;)V");
 
-  return AndroidRuntime::registerNativeMethods(env, "com/android/internal/os/Zygote",
-      gMethods, NELEM(gMethods));
+  return RegisterMethodsOrDie(env, "com/android/internal/os/Zygote", gMethods, NELEM(gMethods));
 }
 }  // namespace android
 

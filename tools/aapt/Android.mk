@@ -36,7 +36,6 @@ aaptSources := \
     Images.cpp \
     Package.cpp \
     pseudolocalize.cpp \
-    qsort_r_compat.c \
     Resource.cpp \
     ResourceFilter.cpp \
     ResourceIdCache.cpp \
@@ -68,6 +67,7 @@ aaptHostStaticLibs := \
     libziparchive-host
 
 aaptCFlags := -DAAPT_VERSION=\"$(BUILD_NUMBER)\"
+aaptCFlags += -Wall -Werror
 
 ifeq ($(HOST_OS),linux)
     aaptHostLdLibs += -lrt -ldl -lpthread
@@ -118,6 +118,7 @@ include $(BUILD_HOST_EXECUTABLE)
 # Build the host tests: libaapt_tests
 # ==========================================================
 include $(CLEAR_VARS)
+LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 
 LOCAL_MODULE := libaapt_tests
 LOCAL_CFLAGS += $(aaptCFlags)
@@ -139,10 +140,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := aapt
 LOCAL_CFLAGS += $(aaptCFlags)
 LOCAL_SRC_FILES := $(aaptSources) $(aaptMain)
-LOCAL_C_INCLUDES += \
-    $(aaptCIncludes) \
-    bionic \
-    external/stlport/stlport
+LOCAL_C_INCLUDES += $(aaptCIncludes)
 LOCAL_SHARED_LIBRARIES := \
     libandroidfw \
     libutils \
@@ -151,7 +149,6 @@ LOCAL_SHARED_LIBRARIES := \
     liblog \
     libz
 LOCAL_STATIC_LIBRARIES := \
-    libstlport_static \
     libexpat_static
 
 include $(BUILD_EXECUTABLE)

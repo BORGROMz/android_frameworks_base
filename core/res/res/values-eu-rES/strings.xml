@@ -40,8 +40,6 @@
     <string name="durationSeconds" msgid="8050088505238241405">"<xliff:g id="SECONDS">%1$d</xliff:g> s"</string>
     <string name="durationSecond" msgid="985669622276420331">"<xliff:g id="SECONDS">%1$d</xliff:g> s"</string>
     <string name="untitled" msgid="4638956954852782576">"&lt;Izengabea&gt;"</string>
-    <string name="ellipsis" msgid="7899829516048813237">"…"</string>
-    <string name="ellipsis_two_dots" msgid="1228078994866030736">"‥"</string>
     <string name="emptyPhoneNumber" msgid="7694063042079676517">"(Ez dago telefono-zenbakirik)"</string>
     <string name="unknownName" msgid="6867811765370350269">"Ezezaguna"</string>
     <string name="defaultVoiceMailAlphaTag" msgid="2660020990097733077">"Erantzungailua"</string>
@@ -192,9 +190,9 @@
     <string name="global_actions" product="default" msgid="2406416831541615258">"Telefonoaren aukerak"</string>
     <string name="global_action_lock" msgid="2844945191792119712">"Pantailaren blokeoa"</string>
     <string name="global_action_power_off" msgid="4471879440839879722">"Itzali"</string>
-    <string name="global_action_bug_report" msgid="7934010578922304799">"Programa-akatsen txostena"</string>
-    <string name="bugreport_title" msgid="2667494803742548533">"Sortu programa-akatsen txostena"</string>
-    <string name="bugreport_message" msgid="398447048750350456">"Gailuaren uneko egoerari buruzko informazioa bilduko da, mezu elektroniko gisa bidaltzeko. Minutu batzuk igaroko dira programa-akatsen txostena sortzen hasten denetik bidaltzeko prest egon arte. Itxaron, mesedez."</string>
+    <string name="global_action_bug_report" msgid="7934010578922304799">"Akatsen txostena"</string>
+    <string name="bugreport_title" msgid="2667494803742548533">"Sortu akatsen txostena"</string>
+    <string name="bugreport_message" msgid="398447048750350456">"Gailuaren uneko egoerari buruzko informazioa bilduko da, mezu elektroniko gisa bidaltzeko. Minutu batzuk igaroko dira akatsen txostena sortzen hasten denetik bidaltzeko prest egon arte. Itxaron, mesedez."</string>
     <string name="global_action_toggle_silent_mode" msgid="8219525344246810925">"Isilik modua"</string>
     <string name="global_action_silent_mode_on_status" msgid="3289841937003758806">"Soinua DESAKTIBATUTA dago"</string>
     <string name="global_action_silent_mode_off_status" msgid="1506046579177066419">"Soinua AKTIBATUTA dago"</string>
@@ -202,6 +200,7 @@
     <string name="global_actions_airplane_mode_on_status" msgid="2719557982608919750">"Hegaldi modua AKTIBATUTA dago"</string>
     <string name="global_actions_airplane_mode_off_status" msgid="5075070442854490296">"Hegaldi modua DESAKTIBATUTA dago"</string>
     <string name="global_action_settings" msgid="1756531602592545966">"Ezarpenak"</string>
+    <string name="global_action_voice_assist" msgid="7751191495200504480">"Ahots-laguntza"</string>
     <string name="global_action_lockdown" msgid="8751542514724332873">"Blokeatu"</string>
     <string name="status_bar_notification_info_overflow" msgid="5301981741705354993">"999+"</string>
     <string name="safeMode" msgid="2788228061547930246">"Modu segurua"</string>
@@ -426,7 +425,7 @@
     <string name="permlab_bindVoiceInteraction" msgid="5334852580713715068">"Lotu ahots bidezko elkarrekintzako zerbitzuei"</string>
     <string name="permdesc_bindVoiceInteraction" msgid="2345721766501778101">"Ahots bidezko elkarrekintzako zerbitzu baten goi-mailako interfazeari lotzea baimentzen die titularrei. Aplikazio normalek ez lukete beharko."</string>
     <string name="permlab_manageVoiceKeyphrases" msgid="1252285102392793548">"kudeatu ahozko gako-esaldiak"</string>
-    <string name="permdesc_manageVoiceKeyphrases" msgid="8476560722907530008">"Ahoz esandako gako-hitzak hautemateko gako-esaldiak kudeatzea baimentzen die aplikazioei. Aplikazio normalek ez lukete behar."</string>
+    <string name="permdesc_manageVoiceKeyphrases" msgid="8476560722907530008">"Ahozko pasahitzak hautemateko gako-esaldiak kudeatzea baimentzen die aplikazioei. Aplikazio normalek ez lukete behar."</string>
     <string name="permlab_bindRemoteDisplay" msgid="1782923938029941960">"Lotu urruneko pantaila batera"</string>
     <string name="permdesc_bindRemoteDisplay" msgid="1261242718727295981">"Urruneko pantaila baten goi-mailako interfazera lotzeko aukera ematen dio titularrari. Aplikazio normalek ez dute baimen hau behar."</string>
     <string name="permlab_bindRemoteViews" msgid="5697987759897367099">"lotu widget-zerbitzu batekin"</string>
@@ -559,7 +558,7 @@
     <string name="permdesc_controlVpn" msgid="762852603315861214">"Sare pribatu birtualen behe-mailako eginbideak kontrolatzea baimentzen die aplikazioei."</string>
     <string name="permlab_captureAudioOutput" msgid="6857134498402346708">"Grabatu audio-irteera"</string>
     <string name="permdesc_captureAudioOutput" msgid="6210597754212208853">"Audio-irteera grabatzeko eta birbideratzeko aukera ematen die aplikazioei."</string>
-    <string name="permlab_captureAudioHotword" msgid="1890553935650349808">"Hauteman Hotword"</string>
+    <string name="permlab_captureAudioHotword" msgid="1890553935650349808">"Hauteman ahozko pasahitza"</string>
     <string name="permdesc_captureAudioHotword" msgid="9151807958153056810">"Hotword bidez hauteman daitekeen audioa grabatzeko aukera ematen die aplikazioei. Atzeko planoan grabatzeak ez du bestelako audio-grabazioak (adibidez, bideokamera bidezkoak) egitea eragozten."</string>
     <string name="permlab_modifyAudioRouting" msgid="7738060354490807723">"Audio-bideratzea"</string>
     <string name="permdesc_modifyAudioRouting" msgid="7205731074267199735">"Audio-bideratzea zuzenean kontrolatzea eta audio-gidalerroei gainjartzea baimentzen die aplikazioei."</string>
@@ -1128,75 +1127,11 @@
     <string name="enable_explore_by_touch_warning_message" product="default" msgid="2708199672852373195">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> zerbitzuak \"Arakatu ukituta\" eginbidea gaitu nahi du. Eginbide hori aktibatuta dagoenean, hatzaren azpian duzunaren azalpena ikus edo entzun dezakezu, edo telefonoarekin elkarrekintzan aritzeko keinuak egin ditzakezu."</string>
     <string name="oneMonthDurationPast" msgid="7396384508953779925">"Duela hilabete"</string>
     <string name="beforeOneMonthDurationPast" msgid="909134546836499826">"Duela hilabete baino gutxiago"</string>
-  <plurals name="num_seconds_ago">
-    <item quantity="one" msgid="4869870056547896011">"duela segundo bat"</item>
-    <item quantity="other" msgid="3903706804349556379">"duela <xliff:g id="COUNT">%d</xliff:g> segundo"</item>
-  </plurals>
-  <plurals name="num_minutes_ago">
-    <item quantity="one" msgid="3306787433088810191">"duela minutu bat"</item>
-    <item quantity="other" msgid="2176942008915455116">"duela <xliff:g id="COUNT">%d</xliff:g> minutu"</item>
-  </plurals>
-  <plurals name="num_hours_ago">
-    <item quantity="one" msgid="9150797944610821849">"Duela ordubete"</item>
-    <item quantity="other" msgid="2467273239587587569">"duela <xliff:g id="COUNT">%d</xliff:g> ordu"</item>
-  </plurals>
   <plurals name="last_num_days">
     <item quantity="other" msgid="3069992808164318268">"azken <xliff:g id="COUNT">%d</xliff:g> egunak"</item>
   </plurals>
     <string name="last_month" msgid="3959346739979055432">"Azken hilabetea"</string>
     <string name="older" msgid="5211975022815554840">"Zaharragoa"</string>
-  <plurals name="num_days_ago">
-    <item quantity="one" msgid="861358534398115820">"atzo"</item>
-    <item quantity="other" msgid="2479586466153314633">"Duela <xliff:g id="COUNT">%d</xliff:g> egun"</item>
-  </plurals>
-  <plurals name="in_num_seconds">
-    <item quantity="one" msgid="2729745560954905102">"segundo bat barru"</item>
-    <item quantity="other" msgid="1241926116443974687">"<xliff:g id="COUNT">%d</xliff:g> segundo barru"</item>
-  </plurals>
-  <plurals name="in_num_minutes">
-    <item quantity="one" msgid="8793095251325200395">"Minutu bat barru"</item>
-    <item quantity="other" msgid="3330713936399448749">"<xliff:g id="COUNT">%d</xliff:g> minutu barru"</item>
-  </plurals>
-  <plurals name="in_num_hours">
-    <item quantity="one" msgid="7164353342477769999">"Ordubete barru"</item>
-    <item quantity="other" msgid="547290677353727389">"<xliff:g id="COUNT">%d</xliff:g> ordu barru"</item>
-  </plurals>
-  <plurals name="in_num_days">
-    <item quantity="one" msgid="5413088743009839518">"bihar"</item>
-    <item quantity="other" msgid="5109449375100953247">"<xliff:g id="COUNT">%d</xliff:g> egun barru"</item>
-  </plurals>
-  <plurals name="abbrev_num_seconds_ago">
-    <item quantity="one" msgid="1849036840200069118">"duela segundo bat"</item>
-    <item quantity="other" msgid="3699169366650930415">"duela <xliff:g id="COUNT">%d</xliff:g> segundo"</item>
-  </plurals>
-  <plurals name="abbrev_num_minutes_ago">
-    <item quantity="one" msgid="6361490147113871545">"duela minutu bat"</item>
-    <item quantity="other" msgid="851164968597150710">"duela <xliff:g id="COUNT">%d</xliff:g> minutu"</item>
-  </plurals>
-  <plurals name="abbrev_num_hours_ago">
-    <item quantity="one" msgid="4796212039724722116">"duela ordubete"</item>
-    <item quantity="other" msgid="6889970745748538901">"duela <xliff:g id="COUNT">%d</xliff:g> ordu"</item>
-  </plurals>
-  <plurals name="abbrev_num_days_ago">
-    <item quantity="one" msgid="8463161711492680309">"atzo"</item>
-    <item quantity="other" msgid="3453342639616481191">"Duela <xliff:g id="COUNT">%d</xliff:g> egun"</item>
-  </plurals>
-  <plurals name="abbrev_in_num_seconds">
-    <item quantity="one" msgid="5842225370795066299">"segundo bat barru"</item>
-    <item quantity="other" msgid="5495880108825805108">"<xliff:g id="COUNT">%d</xliff:g> segundo barru"</item>
-  </plurals>
-  <plurals name="abbrev_in_num_minutes">
-    <item quantity="one" msgid="562786149928284878">"minutu bat barru"</item>
-    <item quantity="other" msgid="4216113292706568726">"<xliff:g id="COUNT">%d</xliff:g> minutu barru"</item>
-  </plurals>
-  <plurals name="abbrev_in_num_hours">
-    <item quantity="one" msgid="3274708118124045246">"ordubete barru"</item>
-    <item quantity="other" msgid="3705373766798013406">"<xliff:g id="COUNT">%d</xliff:g> ordu barru"</item>
-  </plurals>
-  <plurals name="abbrev_in_num_days">
-    <item quantity="one" msgid="2178576254385739855">"bihar"</item>
-    <item quantity="other" msgid="2973062968038355991">"<xliff:g id="COUNT">%d</xliff:g> egun barru"</item>
-  </plurals>
     <string name="preposition_for_date" msgid="9093949757757445117">"data: <xliff:g id="DATE">%s</xliff:g>"</string>
     <string name="preposition_for_time" msgid="5506831244263083793">"ordua: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="preposition_for_year" msgid="5040395640711867177">"urtea: <xliff:g id="YEAR">%s</xliff:g>"</string>
@@ -1660,7 +1595,7 @@
     <string name="media_route_status_available" msgid="6983258067194649391">"Erabilgarri"</string>
     <string name="media_route_status_not_available" msgid="6739899962681886401">"Ez dago erabilgarri"</string>
     <string name="media_route_status_in_use" msgid="4533786031090198063">"Abian"</string>
-    <string name="display_manager_built_in_display_name" msgid="2583134294292563941">"Pantaila barneratua"</string>
+    <string name="display_manager_built_in_display_name" msgid="2583134294292563941">"Pantaila integratua"</string>
     <string name="display_manager_hdmi_display_name" msgid="1555264559227470109">"HDMI pantaila"</string>
     <string name="display_manager_overlay_display_name" msgid="5142365982271620716">"<xliff:g id="ID">%1$d</xliff:g>. gainjartzea"</string>
     <string name="display_manager_overlay_display_title" msgid="652124517672257172">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="WIDTH">%2$d</xliff:g> x <xliff:g id="HEIGHT">%3$d</xliff:g>, <xliff:g id="DPI">%4$d</xliff:g> dpi"</string>

@@ -199,12 +199,14 @@ LOCAL_SRC_FILES += \
 	core/java/android/os/INetworkActivityListener.aidl \
 	core/java/android/os/INetworkManagementService.aidl \
 	core/java/android/os/IPermissionController.aidl \
+	core/java/android/os/IProcessInfoService.aidl \
 	core/java/android/os/IPowerManager.aidl \
 	core/java/android/os/IRemoteCallback.aidl \
 	core/java/android/os/ISchedulingPolicyService.aidl \
 	core/java/android/os/IUpdateLock.aidl \
 	core/java/android/os/IUserManager.aidl \
 	core/java/android/os/IVibratorService.aidl \
+	core/java/android/security/IKeystoreService.aidl \
 	core/java/android/service/carrier/ICarrierMessagingCallback.aidl \
 	core/java/android/service/carrier/ICarrierMessagingService.aidl \
 	core/java/android/service/notification/INotificationListener.aidl \
@@ -1016,12 +1018,8 @@ ext_dirs := \
 	../../external/nist-sip/java \
 	../../external/apache-http/src \
 	../../external/tagsoup/src \
-	../../external/libphonenumber/java/src
 
 ext_src_files := $(call all-java-files-under,$(ext_dirs))
-
-ext_res_dirs := \
-	../../external/libphonenumber/java/src
 
 # ====  the library  =========================================
 include $(CLEAR_VARS)
@@ -1030,7 +1028,7 @@ LOCAL_SRC_FILES := $(ext_src_files)
 
 LOCAL_NO_STANDARD_LIBRARIES := true
 LOCAL_JAVA_LIBRARIES := core-libart
-LOCAL_JAVA_RESOURCE_DIRS := $(ext_res_dirs)
+LOCAL_STATIC_JAVA_LIBRARIES := libphonenumber-platform
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := ext
 

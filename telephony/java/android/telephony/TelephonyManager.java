@@ -2266,11 +2266,7 @@ public class TelephonyManager {
      * Returns a constant indicating the call state (cellular) on the device.
      */
     public int getCallState() {
-        try {
-            return getTelecomService().getCallState();
-        } catch (RemoteException | NullPointerException e) {
-            return CALL_STATE_IDLE;
-        }
+        return getCallState(getDefaultSubscription());
     }
 
     /**

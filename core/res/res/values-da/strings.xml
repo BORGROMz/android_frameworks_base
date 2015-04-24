@@ -40,8 +40,6 @@
     <string name="durationSeconds" msgid="8050088505238241405">"<xliff:g id="SECONDS">%1$d</xliff:g> sek."</string>
     <string name="durationSecond" msgid="985669622276420331">"<xliff:g id="SECONDS">%1$d</xliff:g> sek."</string>
     <string name="untitled" msgid="4638956954852782576">"&lt;Uden titel&gt;"</string>
-    <string name="ellipsis" msgid="7899829516048813237">"…"</string>
-    <string name="ellipsis_two_dots" msgid="1228078994866030736">".."</string>
     <string name="emptyPhoneNumber" msgid="7694063042079676517">"(Intet telefonnummer)"</string>
     <string name="unknownName" msgid="6867811765370350269">"Ukendt"</string>
     <string name="defaultVoiceMailAlphaTag" msgid="2660020990097733077">"Telefonsvarer"</string>
@@ -202,6 +200,7 @@
     <string name="global_actions_airplane_mode_on_status" msgid="2719557982608919750">"Flytilstand er TIL"</string>
     <string name="global_actions_airplane_mode_off_status" msgid="5075070442854490296">"Flytilstand er slået FRA"</string>
     <string name="global_action_settings" msgid="1756531602592545966">"Indstillinger"</string>
+    <string name="global_action_voice_assist" msgid="7751191495200504480">"Voice Assist"</string>
     <string name="global_action_lockdown" msgid="8751542514724332873">"Lås nu"</string>
     <string name="status_bar_notification_info_overflow" msgid="5301981741705354993">"999+"</string>
     <string name="safeMode" msgid="2788228061547930246">"Sikker tilstand"</string>
@@ -703,7 +702,7 @@
     <string name="permdesc_accessWifiState" msgid="5002798077387803726">"Tillader, at appen kan læse oplysninger om Wi-Fi-netværk, f.eks. hvorvidt Wi-Fi er aktiveret og navnet på forbundne Wi-Fi-enheder."</string>
     <string name="permlab_changeWifiState" msgid="6550641188749128035">"oprette og afbryde Wi-Fi-forbindelse"</string>
     <string name="permdesc_changeWifiState" msgid="7137950297386127533">"Tillader, at appen kan oprette og afbryde forbindelsen fra Wi-Fi-adgangspunkter og foretage ændringer i enhedskonfigurationen for Wi-Fi-netværk."</string>
-    <string name="permlab_changeWifiMulticastState" msgid="1368253871483254784">"tillad Wi-Fi-multicastmodtagelse"</string>
+    <string name="permlab_changeWifiMulticastState" msgid="1368253871483254784">"tillade Wi-Fi-multicastmodtagelse"</string>
     <string name="permdesc_changeWifiMulticastState" product="tablet" msgid="7969774021256336548">"Tillader, at appen kan modtage pakker, der sendes til alle enheder på et Wi-Fi-netværk ved hjælp af multicastadresser, ikke kun din tablet. Den bruger mere strøm end tilstanden, der ikke anvender multicast."</string>
     <string name="permdesc_changeWifiMulticastState" product="tv" msgid="9031975661145014160">"Giver appen lov til at modtage pakker, der sendes til alle enheder og ikke bare dit tv på et Wi-Fi-netværk ved hjælp af multicast-adresser. Dette bruger mere strøm end tilstanden uden multicast."</string>
     <string name="permdesc_changeWifiMulticastState" product="default" msgid="6851949706025349926">"Tillader, at appen kan modtage pakker, der sendes til alle enheder på et Wi-Fi-netværk ved hjælp af multicastadresser, ikke kun din telefon. Den bruger mere strøm end tilstanden, der ikke anvender multicast."</string>
@@ -1128,75 +1127,11 @@
     <string name="enable_explore_by_touch_warning_message" product="default" msgid="2708199672852373195">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> ønsker at aktivere Udforsk ved berøring. Når Udforsk ved berøring er aktiveret, kan du høre eller se beskrivelser af, hvad der er under din finger, eller udføre bevægelser for at interagere med telefonen."</string>
     <string name="oneMonthDurationPast" msgid="7396384508953779925">"for 1 måned siden"</string>
     <string name="beforeOneMonthDurationPast" msgid="909134546836499826">"Før for 1 måned siden"</string>
-  <plurals name="num_seconds_ago">
-    <item quantity="one" msgid="4869870056547896011">"for 1 sekund siden"</item>
-    <item quantity="other" msgid="3903706804349556379">"for <xliff:g id="COUNT">%d</xliff:g> sekunder siden"</item>
-  </plurals>
-  <plurals name="num_minutes_ago">
-    <item quantity="one" msgid="3306787433088810191">"for 1 minut siden"</item>
-    <item quantity="other" msgid="2176942008915455116">"for <xliff:g id="COUNT">%d</xliff:g> minutter siden"</item>
-  </plurals>
-  <plurals name="num_hours_ago">
-    <item quantity="one" msgid="9150797944610821849">"for 1 time siden"</item>
-    <item quantity="other" msgid="2467273239587587569">"for <xliff:g id="COUNT">%d</xliff:g> timer siden"</item>
-  </plurals>
   <plurals name="last_num_days">
     <item quantity="other" msgid="3069992808164318268">"Seneste <xliff:g id="COUNT">%d</xliff:g> dage"</item>
   </plurals>
     <string name="last_month" msgid="3959346739979055432">"Seneste måned"</string>
     <string name="older" msgid="5211975022815554840">"Ældre"</string>
-  <plurals name="num_days_ago">
-    <item quantity="one" msgid="861358534398115820">"i går"</item>
-    <item quantity="other" msgid="2479586466153314633">"for <xliff:g id="COUNT">%d</xliff:g> dage siden"</item>
-  </plurals>
-  <plurals name="in_num_seconds">
-    <item quantity="one" msgid="2729745560954905102">"om 1 sekund"</item>
-    <item quantity="other" msgid="1241926116443974687">"om <xliff:g id="COUNT">%d</xliff:g> sekunder"</item>
-  </plurals>
-  <plurals name="in_num_minutes">
-    <item quantity="one" msgid="8793095251325200395">"om 1 minut"</item>
-    <item quantity="other" msgid="3330713936399448749">"om <xliff:g id="COUNT">%d</xliff:g> minutter"</item>
-  </plurals>
-  <plurals name="in_num_hours">
-    <item quantity="one" msgid="7164353342477769999">"om 1 time"</item>
-    <item quantity="other" msgid="547290677353727389">"om <xliff:g id="COUNT">%d</xliff:g> timer"</item>
-  </plurals>
-  <plurals name="in_num_days">
-    <item quantity="one" msgid="5413088743009839518">"i morgen"</item>
-    <item quantity="other" msgid="5109449375100953247">"om <xliff:g id="COUNT">%d</xliff:g> dage"</item>
-  </plurals>
-  <plurals name="abbrev_num_seconds_ago">
-    <item quantity="one" msgid="1849036840200069118">"for 1 sek. siden"</item>
-    <item quantity="other" msgid="3699169366650930415">"for <xliff:g id="COUNT">%d</xliff:g> sek. siden"</item>
-  </plurals>
-  <plurals name="abbrev_num_minutes_ago">
-    <item quantity="one" msgid="6361490147113871545">"for 1 min. siden"</item>
-    <item quantity="other" msgid="851164968597150710">"for <xliff:g id="COUNT">%d</xliff:g> min. siden"</item>
-  </plurals>
-  <plurals name="abbrev_num_hours_ago">
-    <item quantity="one" msgid="4796212039724722116">"for 1 time siden"</item>
-    <item quantity="other" msgid="6889970745748538901">"for <xliff:g id="COUNT">%d</xliff:g> timer siden"</item>
-  </plurals>
-  <plurals name="abbrev_num_days_ago">
-    <item quantity="one" msgid="8463161711492680309">"i går"</item>
-    <item quantity="other" msgid="3453342639616481191">"for <xliff:g id="COUNT">%d</xliff:g> dage siden"</item>
-  </plurals>
-  <plurals name="abbrev_in_num_seconds">
-    <item quantity="one" msgid="5842225370795066299">"om 1 sek."</item>
-    <item quantity="other" msgid="5495880108825805108">"om <xliff:g id="COUNT">%d</xliff:g> sekunder"</item>
-  </plurals>
-  <plurals name="abbrev_in_num_minutes">
-    <item quantity="one" msgid="562786149928284878">"om 1 min."</item>
-    <item quantity="other" msgid="4216113292706568726">"om <xliff:g id="COUNT">%d</xliff:g> min."</item>
-  </plurals>
-  <plurals name="abbrev_in_num_hours">
-    <item quantity="one" msgid="3274708118124045246">"om 1 time"</item>
-    <item quantity="other" msgid="3705373766798013406">"om <xliff:g id="COUNT">%d</xliff:g> timer"</item>
-  </plurals>
-  <plurals name="abbrev_in_num_days">
-    <item quantity="one" msgid="2178576254385739855">"i morgen"</item>
-    <item quantity="other" msgid="2973062968038355991">"om <xliff:g id="COUNT">%d</xliff:g> dage"</item>
-  </plurals>
     <string name="preposition_for_date" msgid="9093949757757445117">"den <xliff:g id="DATE">%s</xliff:g>"</string>
     <string name="preposition_for_time" msgid="5506831244263083793">"kl. <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="preposition_for_year" msgid="5040395640711867177">"i <xliff:g id="YEAR">%s</xliff:g>"</string>

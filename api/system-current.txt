@@ -617,6 +617,7 @@ package android {
     field public static final int expandableListViewWhiteStyle = 16843446; // 0x10102b6
     field public static final int exported = 16842768; // 0x1010010
     field public static final int extraTension = 16843371; // 0x101026b
+    field public static final int extractNativeLibs = 16843990; // 0x10104d6
     field public static final int factor = 16843219; // 0x10101d3
     field public static final int fadeDuration = 16843384; // 0x1010278
     field public static final int fadeEnabled = 16843390; // 0x101027e
@@ -5327,6 +5328,7 @@ package android.app {
 
   public class WallpaperManager {
     method public void clear() throws java.io.IOException;
+    method public void clearWallpaper();
     method public void clearWallpaperOffsets(android.os.IBinder);
     method public void forgetLoadedWallpaper();
     method public android.graphics.drawable.Drawable getBuiltInDrawable();
@@ -5347,6 +5349,7 @@ package android.app {
     method public void setDisplayPadding(android.graphics.Rect);
     method public void setResource(int) throws java.io.IOException;
     method public void setStream(java.io.InputStream) throws java.io.IOException;
+    method public boolean setWallpaperComponent(android.content.ComponentName);
     method public void setWallpaperOffsetSteps(float, float);
     method public void setWallpaperOffsets(android.os.IBinder, float, float);
     method public void suggestDesiredDimensions(int, int);
@@ -8612,6 +8615,7 @@ package android.content.pm {
     field public static final int FLAG_ALLOW_TASK_REPARENTING = 32; // 0x20
     field public static final int FLAG_DEBUGGABLE = 2; // 0x2
     field public static final int FLAG_EXTERNAL_STORAGE = 262144; // 0x40000
+    field public static final int FLAG_EXTRACT_NATIVE_LIBS = 268435456; // 0x10000000
     field public static final int FLAG_FACTORY_TEST = 16; // 0x10
     field public static final int FLAG_FULL_BACKUP_ONLY = 67108864; // 0x4000000
     field public static final int FLAG_HAS_CODE = 4; // 0x4
@@ -12709,6 +12713,7 @@ package android.hardware {
     field public static final java.lang.String STRING_TYPE_STEP_COUNTER = "android.sensor.step_counter";
     field public static final java.lang.String STRING_TYPE_STEP_DETECTOR = "android.sensor.step_detector";
     field public static final deprecated java.lang.String STRING_TYPE_TEMPERATURE = "android.sensor.temperature";
+    field public static final java.lang.String STRING_TYPE_WRIST_TILT_GESTURE = "android.sensor.wrist_tilt_gesture";
     field public static final int TYPE_ACCELEROMETER = 1; // 0x1
     field public static final int TYPE_ALL = -1; // 0xffffffff
     field public static final int TYPE_AMBIENT_TEMPERATURE = 13; // 0xd
@@ -12731,6 +12736,7 @@ package android.hardware {
     field public static final int TYPE_STEP_COUNTER = 19; // 0x13
     field public static final int TYPE_STEP_DETECTOR = 18; // 0x12
     field public static final deprecated int TYPE_TEMPERATURE = 7; // 0x7
+    field public static final int TYPE_WRIST_TILT_GESTURE = 26; // 0x1a
   }
 
   public class SensorEvent {
@@ -18253,6 +18259,7 @@ package android.net {
   }
 
   public final class IpPrefix implements android.os.Parcelable {
+    method public boolean contains(java.net.InetAddress);
     method public int describeContents();
     method public java.net.InetAddress getAddress();
     method public int getPrefixLength();
@@ -18837,7 +18844,7 @@ package android.net.http {
     method public static android.net.http.HttpResponseCache getInstalled();
     method public int getNetworkCount();
     method public int getRequestCount();
-    method public static android.net.http.HttpResponseCache install(java.io.File, long) throws java.io.IOException;
+    method public static synchronized android.net.http.HttpResponseCache install(java.io.File, long) throws java.io.IOException;
     method public long maxSize();
     method public java.net.CacheRequest put(java.net.URI, java.net.URLConnection) throws java.io.IOException;
     method public long size();
@@ -20020,6 +20027,7 @@ package android.nfc {
 
   public final class NfcEvent {
     field public final android.nfc.NfcAdapter nfcAdapter;
+    field public final byte peerLlcpVersion;
   }
 
   public final class NfcManager {
@@ -26872,6 +26880,7 @@ package android.provider {
     field public static final java.lang.String SHOW_PROCESSES = "show_processes";
     field public static final java.lang.String STAY_ON_WHILE_PLUGGED_IN = "stay_on_while_plugged_in";
     field public static final java.lang.String SYS_PROP_SETTING_VERSION = "sys.settings_global_version";
+    field public static final java.lang.String THEATER_MODE_ON = "theater_mode_on";
     field public static final java.lang.String TRANSITION_ANIMATION_SCALE = "transition_animation_scale";
     field public static final java.lang.String USB_MASS_STORAGE_ENABLED = "usb_mass_storage_enabled";
     field public static final java.lang.String USE_GOOGLE_MAIL = "use_google_mail";
@@ -28106,6 +28115,7 @@ package android.renderscript {
   public class Script extends android.renderscript.BaseObj {
     method public void bindAllocation(android.renderscript.Allocation, int);
     method protected android.renderscript.Script.FieldID createFieldID(int, android.renderscript.Element);
+    method protected android.renderscript.Script.InvokeID createInvokeID(int);
     method protected android.renderscript.Script.KernelID createKernelID(int, int, android.renderscript.Element, android.renderscript.Element);
     method protected void forEach(int, android.renderscript.Allocation, android.renderscript.Allocation, android.renderscript.FieldPacker);
     method protected void forEach(int, android.renderscript.Allocation, android.renderscript.Allocation, android.renderscript.FieldPacker, android.renderscript.Script.LaunchOptions);
@@ -28146,6 +28156,9 @@ package android.renderscript {
   public static final class Script.FieldID extends android.renderscript.BaseObj {
   }
 
+  public static final class Script.InvokeID extends android.renderscript.BaseObj {
+  }
+
   public static final class Script.KernelID extends android.renderscript.BaseObj {
   }
 
@@ -28170,17 +28183,43 @@ package android.renderscript {
   }
 
   public final class ScriptGroup extends android.renderscript.BaseObj {
-    method public void execute();
-    method public void setInput(android.renderscript.Script.KernelID, android.renderscript.Allocation);
-    method public void setOutput(android.renderscript.Script.KernelID, android.renderscript.Allocation);
+    method public java.lang.Object[] execute(java.lang.Object...);
+    method public deprecated void execute();
+    method public deprecated void setInput(android.renderscript.Script.KernelID, android.renderscript.Allocation);
+    method public deprecated void setOutput(android.renderscript.Script.KernelID, android.renderscript.Allocation);
   }
 
-  public static final class ScriptGroup.Builder {
+  public static final class ScriptGroup.Binding {
+    ctor public ScriptGroup.Binding(android.renderscript.Script.FieldID, java.lang.Object);
+    method public android.renderscript.Script.FieldID getField();
+    method public java.lang.Object getValue();
+  }
+
+  public static final deprecated class ScriptGroup.Builder {
     ctor public ScriptGroup.Builder(android.renderscript.RenderScript);
     method public android.renderscript.ScriptGroup.Builder addConnection(android.renderscript.Type, android.renderscript.Script.KernelID, android.renderscript.Script.FieldID);
     method public android.renderscript.ScriptGroup.Builder addConnection(android.renderscript.Type, android.renderscript.Script.KernelID, android.renderscript.Script.KernelID);
     method public android.renderscript.ScriptGroup.Builder addKernel(android.renderscript.Script.KernelID);
     method public android.renderscript.ScriptGroup create();
+  }
+
+  public static final class ScriptGroup.Builder2 {
+    ctor public ScriptGroup.Builder2(android.renderscript.RenderScript);
+    method public android.renderscript.ScriptGroup.Input addInput();
+    method public android.renderscript.ScriptGroup.Closure addInvoke(android.renderscript.Script.InvokeID, java.lang.Object...);
+    method public android.renderscript.ScriptGroup.Closure addKernel(android.renderscript.Script.KernelID, android.renderscript.Type, java.lang.Object...);
+    method public android.renderscript.ScriptGroup create(java.lang.String, android.renderscript.ScriptGroup.Future...);
+  }
+
+  public static final class ScriptGroup.Closure extends android.renderscript.BaseObj {
+    method public android.renderscript.ScriptGroup.Future getGlobal(android.renderscript.Script.FieldID);
+    method public android.renderscript.ScriptGroup.Future getReturn();
+  }
+
+  public static final class ScriptGroup.Future {
+  }
+
+  public static final class ScriptGroup.Input {
   }
 
   public abstract class ScriptIntrinsic extends android.renderscript.Script {
@@ -36911,8 +36950,10 @@ package android.view {
     method public java.lang.String debug(java.lang.String);
     method public int describeContents();
     method public final java.lang.CharSequence getTitle();
+    method public final long getUserActivityTimeout();
     method public static boolean mayUseInputMethod(int);
     method public final void setTitle(java.lang.CharSequence);
+    method public final void setUserActivityTimeout(long);
     method public void writeToParcel(android.os.Parcel, int);
     field public static final int ALPHA_CHANGED = 128; // 0x80
     field public static final int ANIMATION_CHANGED = 16; // 0x10
@@ -44046,7 +44087,7 @@ package java.lang {
     method public static double nextUp(double);
     method public static float nextUp(float);
     method public static double pow(double, double);
-    method public static synchronized double random();
+    method public static double random();
     method public static double rint(double);
     method public static long round(double);
     method public static int round(float);

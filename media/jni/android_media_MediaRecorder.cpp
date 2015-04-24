@@ -306,7 +306,7 @@ static void
 android_media_MediaRecorder_setMaxFileSize(
         JNIEnv *env, jobject thiz, jlong max_filesize_bytes)
 {
-    ALOGV("setMaxFileSize(%lld)", max_filesize_bytes);
+    ALOGV("setMaxFileSize(%lld)", (long long)max_filesize_bytes);
     sp<MediaRecorder> mr = getMediaRecorder(env, thiz);
 
     char params[64];
@@ -462,11 +462,13 @@ android_media_MediaRecorder_native_setup(JNIEnv *env, jobject thiz, jobject weak
     sp<JNIMediaRecorderListener> listener = new JNIMediaRecorderListener(env, thiz, weak_this);
     mr->setListener(listener);
 
-   // Convert client name jstring to String16
-    const char16_t *rawClientName = env->GetStringChars(packageName, NULL);
+    // Convert client name jstring to String16
+    const char16_t *rawClientName = reinterpret_cast<const char16_t*>(
+        env->GetStringChars(packageName, NULL));
     jsize rawClientNameLen = env->GetStringLength(packageName);
     String16 clientName(rawClientName, rawClientNameLen);
-    env->ReleaseStringChars(packageName, rawClientName);
+    env->ReleaseStringChars(packageName,
+                            reinterpret_cast<const jchar*>(rawClientName));
 
     // pass client package name for permissions tracking
     mr->setClientName(clientName);
@@ -507,8 +509,6 @@ static JNINativeMethod gMethods[] = {
     {"native_setup",         "(Ljava/lang/Object;Ljava/lang/String;)V", (void *)android_media_MediaRecorder_native_setup},
     {"native_finalize",      "()V",                             (void *)android_media_MediaRecorder_native_finalize},
 };
-
-static const char* const kClassPathName = "android/media/MediaRecorder";
 
 // This function only registers the native methods, and is called from
 // JNI_OnLoad in android_media_MediaPlayer.cpp

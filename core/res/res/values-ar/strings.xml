@@ -40,8 +40,6 @@
     <string name="durationSeconds" msgid="8050088505238241405">"<xliff:g id="SECONDS">%1$d</xliff:g> ثانية"</string>
     <string name="durationSecond" msgid="985669622276420331">"<xliff:g id="SECONDS">%1$d</xliff:g> ثانية"</string>
     <string name="untitled" msgid="4638956954852782576">"‏&lt;بلا عنوان&gt;"</string>
-    <string name="ellipsis" msgid="7899829516048813237">"…"</string>
-    <string name="ellipsis_two_dots" msgid="1228078994866030736">"‥"</string>
     <string name="emptyPhoneNumber" msgid="7694063042079676517">"(ليس هناك رقم هاتف)"</string>
     <string name="unknownName" msgid="6867811765370350269">"غير معروف"</string>
     <string name="defaultVoiceMailAlphaTag" msgid="2660020990097733077">"البريد الصوتي"</string>
@@ -60,12 +58,12 @@
     <string name="mismatchPin" msgid="609379054496863419">"أرقام التعريف الشخصية التي كتبتها غير مطابقة."</string>
     <string name="invalidPin" msgid="3850018445187475377">"اكتب رقم تعريف شخصيًا مكونًا من 4 إلى ثمانية أعداد."</string>
     <string name="invalidPuk" msgid="8761456210898036513">"‏اكتب رمز PUK مكونًا من 8 أرقام أو أكثر."</string>
-    <string name="needPuk" msgid="919668385956251611">"‏بطاقة SIM مؤمّنة بكود PUK. اكتب كود PUK لإلغاء تأمينها."</string>
-    <string name="needPuk2" msgid="4526033371987193070">"‏اكتب PUK2 لإلغاء تأمين بطاقة SIM."</string>
+    <string name="needPuk" msgid="919668385956251611">"‏شريحة SIM مؤمّنة بكود PUK. اكتب كود PUK لإلغاء تأمينها."</string>
+    <string name="needPuk2" msgid="4526033371987193070">"‏اكتب PUK2 لإلغاء تأمين شريحة SIM."</string>
     <string name="enablePin" msgid="209412020907207950">"‏محاولة غير ناجحة، مكّن قفل SIM/RUIM."</string>
   <plurals name="pinpuk_attempts">
-    <item quantity="one" msgid="6596245285809790142">"‏يتبقى لديك محاولة واحدة (<xliff:g id="NUMBER">%d</xliff:g>) يتم بعدها قفل بطاقة SIM."</item>
-    <item quantity="other" msgid="7530597808358774740">"‏يتبقى لديك <xliff:g id="NUMBER">%d</xliff:g> من المحاولات يتم بعدها قفل بطاقة SIM."</item>
+    <item quantity="one" msgid="6596245285809790142">"‏يتبقى لديك محاولة واحدة (<xliff:g id="NUMBER">%d</xliff:g>) يتم بعدها قفل شريحة SIM."</item>
+    <item quantity="other" msgid="7530597808358774740">"‏يتبقى لديك <xliff:g id="NUMBER">%d</xliff:g> من المحاولات يتم بعدها قفل شريحة SIM."</item>
   </plurals>
     <string name="imei" msgid="2625429890869005782">"IMEI"</string>
     <string name="meid" msgid="4841221237681254195">"MEID"</string>
@@ -202,6 +200,7 @@
     <string name="global_actions_airplane_mode_on_status" msgid="2719557982608919750">"وضع الطائرة قيد التشغيل"</string>
     <string name="global_actions_airplane_mode_off_status" msgid="5075070442854490296">"وضع الطائرة متوقف"</string>
     <string name="global_action_settings" msgid="1756531602592545966">"الإعدادات"</string>
+    <string name="global_action_voice_assist" msgid="7751191495200504480">"المساعد الصوتي"</string>
     <string name="global_action_lockdown" msgid="8751542514724332873">"قفل الآن"</string>
     <string name="status_bar_notification_info_overflow" msgid="5301981741705354993">"999+"</string>
     <string name="safeMode" msgid="2788228061547930246">"الوضع الآمن"</string>
@@ -304,13 +303,13 @@
     <string name="permlab_sendRespondViaMessageRequest" msgid="8713889105305943200">"إرسال أحداث يتم الرد عليها عبر رسالة"</string>
     <string name="permdesc_sendRespondViaMessageRequest" msgid="7107648548468778734">"السماح للتطبيق بإرسال طلبات إلى تطبيقات المراسلة الأخرى للتعامل مع الأحداث التي يتم الرد عليها عبر الرسائل في المكالمات الواردة."</string>
     <string name="permlab_readSms" msgid="8745086572213270480">"‏قراءة الرسائل النصية (الرسائل القصيرة SMS أو رسائل الوسائط المتعددة)"</string>
-    <string name="permdesc_readSms" product="tablet" msgid="2467981548684735522">"‏للسماح للتطبيق بقراءة الرسائل القصيرة SMS المخزنة على الجهاز اللوحي أو على بطاقة SIM. ويتيح هذا للتطبيق قراءة جميع الرسائل القصيرة SMS، بغض النظر عن المحتوى أو مدى السرية."</string>
-    <string name="permdesc_readSms" product="tv" msgid="5102425513647038535">"‏يتيح للتطبيق قراءة الرسائل القصيرة SMS المخزنة في التلفزيون أو في بطاقة SIM. ويتيح هذا للتطبيق قراءة جميع الرسائل القصيرة، بغض النظر عن المحتوى ومدى السرية."</string>
-    <string name="permdesc_readSms" product="default" msgid="3695967533457240550">"‏للسماح للتطبيق بقراءة الرسائل القصيرة SMS المخزنة على هاتفك أو على بطاقة SIM. ويتيح هذا للتطبيق قراءة جميع الرسائل القصيرة SMS، بغض النظر عن المحتوى أو مدى السرية."</string>
+    <string name="permdesc_readSms" product="tablet" msgid="2467981548684735522">"‏للسماح للتطبيق بقراءة الرسائل القصيرة SMS المخزنة على الجهاز اللوحي أو على شريحة SIM. ويتيح هذا للتطبيق قراءة جميع الرسائل القصيرة SMS، بغض النظر عن المحتوى أو مدى السرية."</string>
+    <string name="permdesc_readSms" product="tv" msgid="5102425513647038535">"‏يتيح للتطبيق قراءة الرسائل القصيرة SMS المخزنة في التلفزيون أو في شريحة SIM. ويتيح هذا للتطبيق قراءة جميع الرسائل القصيرة، بغض النظر عن المحتوى ومدى السرية."</string>
+    <string name="permdesc_readSms" product="default" msgid="3695967533457240550">"‏للسماح للتطبيق بقراءة الرسائل القصيرة SMS المخزنة على هاتفك أو على شريحة SIM. ويتيح هذا للتطبيق قراءة جميع الرسائل القصيرة SMS، بغض النظر عن المحتوى أو مدى السرية."</string>
     <string name="permlab_writeSms" msgid="3216950472636214774">"‏تعديل الرسائل النصية (الرسائل القصيرة SMS أو رسائل الوسائط المتعددة)"</string>
-    <string name="permdesc_writeSms" product="tablet" msgid="5160413947794501538">"‏للسماح للتطبيق بالكتابة إلى الرسائل القصيرة SMS المخزّنة على الجهاز اللوحي أو بطاقة SIM. قد تحذف التطبيقات الضارة رسائلك."</string>
-    <string name="permdesc_writeSms" product="tv" msgid="955871498983538187">"‏يتيح للتطبيق كتابة رسائل قصيرة SMS مخزنة على التلفزيون أو بطاقة SIM. وقد تؤدي التطبيقات الضارة إلى حذف رسائلك."</string>
-    <string name="permdesc_writeSms" product="default" msgid="7268668709052328567">"‏للسماح للتطبيق بالكتابة إلى الرسائل القصيرة SMS المخزّنة على الهاتف أو بطاقة SIM. قد تحذف التطبيقات الضارة رسائلك."</string>
+    <string name="permdesc_writeSms" product="tablet" msgid="5160413947794501538">"‏للسماح للتطبيق بالكتابة إلى الرسائل القصيرة SMS المخزّنة على الجهاز اللوحي أو شريحة SIM. قد تحذف التطبيقات الضارة رسائلك."</string>
+    <string name="permdesc_writeSms" product="tv" msgid="955871498983538187">"‏يتيح للتطبيق كتابة رسائل قصيرة SMS مخزنة على التلفزيون أو شريحة SIM. وقد تؤدي التطبيقات الضارة إلى حذف رسائلك."</string>
+    <string name="permdesc_writeSms" product="default" msgid="7268668709052328567">"‏للسماح للتطبيق بالكتابة إلى الرسائل القصيرة SMS المخزّنة على الهاتف أو شريحة SIM. قد تحذف التطبيقات الضارة رسائلك."</string>
     <string name="permlab_receiveWapPush" msgid="5991398711936590410">"‏تلقي رسائل نصية (WAP)"</string>
     <string name="permdesc_receiveWapPush" msgid="748232190220583385">"‏للسماح للتطبيق بتلقي رسائل WAP ومعالجتها. ويتضمن هذا الإذن إمكانية مراقبة الرسائل التي يتم إرسالها إليك أو حذفها بدون عرضها لك."</string>
     <string name="permlab_receiveBluetoothMap" msgid="7593811487142360528">"‏تلقي رسائل بلوتوث (MAP)"</string>
@@ -574,7 +573,7 @@
     <string name="permlab_recordAudio" msgid="3876049771427466323">"تسجيل الصوت"</string>
     <string name="permdesc_recordAudio" msgid="4906839301087980680">"للسماح للتطبيق بتسجيل الصوت باستخدام الميكروفون. ويتيح هذا الإذن للتطبيق تسجيل الصوت في أي وقت وبدون موافقة منك."</string>
     <string name="permlab_sim_communication" msgid="1180265879464893029">"‏اتصالات SIM"</string>
-    <string name="permdesc_sim_communication" msgid="5725159654279639498">"‏السماح للتطبيق بإرسال أوامر إلى بطاقة SIM. وهذا أمر بالغ الخطورة."</string>
+    <string name="permdesc_sim_communication" msgid="5725159654279639498">"‏السماح للتطبيق بإرسال أوامر إلى شريحة SIM. وهذا أمر بالغ الخطورة."</string>
     <string name="permlab_camera" msgid="3616391919559751192">"التقاط صور ومقاطع فيديو"</string>
     <string name="permdesc_camera" msgid="8497216524735535009">"للسماح للتطبيق بالتقاط صور ومقاطع فيديو من خلال الكاميرا. ويتيح هذا الإذن للتطبيق استخدام الكاميرا في أي وقت وبدون موافقة منك."</string>
     <string name="permlab_cameraDisableTransmitLed" msgid="2651072630501126222">"‏تعطيل مؤشر LED للإرسال عندما تكون الكاميرا قيد الاستخدام"</string>
@@ -968,14 +967,14 @@
     <string name="lockscreen_pattern_wrong" msgid="4317955014948108794">"أعد المحاولة"</string>
     <string name="lockscreen_password_wrong" msgid="5737815393253165301">"أعد المحاولة"</string>
     <string name="faceunlock_multiple_failures" msgid="754137583022792429">"تم تجاوز الحد الأقصى لعدد محاولات تأمين الجهاز بالوجه"</string>
-    <string name="lockscreen_missing_sim_message_short" msgid="5099439277819215399">"‏ليست هناك بطاقة SIM"</string>
-    <string name="lockscreen_missing_sim_message" product="tablet" msgid="151659196095791474">"‏ليس هناك بطاقة SIM في الجهاز اللوحي."</string>
-    <string name="lockscreen_missing_sim_message" product="tv" msgid="1943633865476989599">"‏لا تتوفر بطاقة SIM في التلفزيون."</string>
-    <string name="lockscreen_missing_sim_message" product="default" msgid="2186920585695169078">"‏ليس هناك بطاقة SIM في الهاتف."</string>
-    <string name="lockscreen_missing_sim_instructions" msgid="5372787138023272615">"‏أدخل بطاقة SIM."</string>
-    <string name="lockscreen_missing_sim_instructions_long" msgid="3526573099019319472">"‏بطاقة SIM مفقودة أو غير قابلة للقراءة. أدخل بطاقة SIM."</string>
-    <string name="lockscreen_permanent_disabled_sim_message_short" msgid="5096149665138916184">"‏بطاقة SIM غير قابلة للاستخدام."</string>
-    <string name="lockscreen_permanent_disabled_sim_instructions" msgid="910904643433151371">"‏تم تعطيل بطاقة SIM بشكل دائم.\n اتصل بمقدم خدمة اللاسلكي للحصول على بطاقة SIM أخرى."</string>
+    <string name="lockscreen_missing_sim_message_short" msgid="5099439277819215399">"‏ليست هناك شريحة SIM"</string>
+    <string name="lockscreen_missing_sim_message" product="tablet" msgid="151659196095791474">"‏ليس هناك شريحة SIM في الجهاز اللوحي."</string>
+    <string name="lockscreen_missing_sim_message" product="tv" msgid="1943633865476989599">"‏لا تتوفر شريحة SIM في التلفزيون."</string>
+    <string name="lockscreen_missing_sim_message" product="default" msgid="2186920585695169078">"‏ليس هناك شريحة SIM في الهاتف."</string>
+    <string name="lockscreen_missing_sim_instructions" msgid="5372787138023272615">"‏أدخل شريحة SIM."</string>
+    <string name="lockscreen_missing_sim_instructions_long" msgid="3526573099019319472">"‏شريحة SIM مفقودة أو غير قابلة للقراءة. أدخل شريحة SIM."</string>
+    <string name="lockscreen_permanent_disabled_sim_message_short" msgid="5096149665138916184">"‏شريحة SIM غير قابلة للاستخدام."</string>
+    <string name="lockscreen_permanent_disabled_sim_instructions" msgid="910904643433151371">"‏تم تعطيل شريحة SIM بشكل دائم.\n اتصل بمقدم خدمة اللاسلكي للحصول على شريحة SIM أخرى."</string>
     <string name="lockscreen_transport_prev_description" msgid="6300840251218161534">"المقطع الصوتي السابق"</string>
     <string name="lockscreen_transport_next_description" msgid="573285210424377338">"المقطع الصوتي التالي"</string>
     <string name="lockscreen_transport_pause_description" msgid="3980308465056173363">"إيقاف مؤقت"</string>
@@ -985,10 +984,10 @@
     <string name="lockscreen_transport_ffw_description" msgid="42987149870928985">"تقديم سريع"</string>
     <string name="emergency_calls_only" msgid="6733978304386365407">"مكالمات طوارئ فقط"</string>
     <string name="lockscreen_network_locked_message" msgid="143389224986028501">"الشبكة مؤمّنة"</string>
-    <string name="lockscreen_sim_puk_locked_message" msgid="7441797339976230">"‏بطاقة SIM مؤمّنة بكود PUK."</string>
+    <string name="lockscreen_sim_puk_locked_message" msgid="7441797339976230">"‏شريحة SIM مؤمّنة بكود PUK."</string>
     <string name="lockscreen_sim_puk_locked_instructions" msgid="8127916255245181063">"راجع دليل المستخدم أو اتصل بخدمة العملاء."</string>
-    <string name="lockscreen_sim_locked_message" msgid="8066660129206001039">"‏بطاقة SIM مؤمّنة."</string>
-    <string name="lockscreen_sim_unlock_progress_dialog_message" msgid="595323214052881264">"‏جارٍ إلغاء تأمين بطاقة SIM…"</string>
+    <string name="lockscreen_sim_locked_message" msgid="8066660129206001039">"‏شريحة SIM مؤمّنة."</string>
+    <string name="lockscreen_sim_unlock_progress_dialog_message" msgid="595323214052881264">"‏جارٍ إلغاء تأمين شريحة SIM…"</string>
     <string name="lockscreen_too_many_failed_attempts_dialog_message" msgid="6481623830344107222">"لقد رسمت نقش إلغاء التأمين بطريقة غير صحيحة <xliff:g id="NUMBER_0">%d</xliff:g> مرة.\n\nالرجاء إعادة المحاولة خلال <xliff:g id="NUMBER_1">%d</xliff:g> ثانية."</string>
     <string name="lockscreen_too_many_failed_password_attempts_dialog_message" msgid="2725973286239344555">"لقد كتبت كلمة المرور <xliff:g id="NUMBER_0">%d</xliff:g> مرة بشكل غير صحيح. \n\nأعد المحاولة خلال <xliff:g id="NUMBER_1">%d</xliff:g> ثانية."</string>
     <string name="lockscreen_too_many_failed_pin_attempts_dialog_message" msgid="6216672706545696955">"‏لقد كتبت رمز PIN <xliff:g id="NUMBER_0">%d</xliff:g> مرة بشكل غير صحيح. \n\nأعد المحاولة خلال <xliff:g id="NUMBER_1">%d</xliff:g> ثانية."</string>
@@ -1128,75 +1127,11 @@
     <string name="enable_explore_by_touch_warning_message" product="default" msgid="2708199672852373195">"‏يريد <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> تمكين ميزة Explore by Touch. عند تشغيل ميزة Explore by Touch، سيكون بإمكانك سماع أو مشاهدة أوصاف لما تحت إصبعك أو إجراء إيماءات للتفاعل مع الهاتف."</string>
     <string name="oneMonthDurationPast" msgid="7396384508953779925">"قبل شهر واحد"</string>
     <string name="beforeOneMonthDurationPast" msgid="909134546836499826">"قبل شهر واحد"</string>
-  <plurals name="num_seconds_ago">
-    <item quantity="one" msgid="4869870056547896011">"قبل ثانية واحدة"</item>
-    <item quantity="other" msgid="3903706804349556379">"قبل <xliff:g id="COUNT">%d</xliff:g> ثانية"</item>
-  </plurals>
-  <plurals name="num_minutes_ago">
-    <item quantity="one" msgid="3306787433088810191">"قبل دقيقة واحدة"</item>
-    <item quantity="other" msgid="2176942008915455116">"قبل <xliff:g id="COUNT">%d</xliff:g> دقيقة"</item>
-  </plurals>
-  <plurals name="num_hours_ago">
-    <item quantity="one" msgid="9150797944610821849">"قبل ساعة واحدة"</item>
-    <item quantity="other" msgid="2467273239587587569">"قبل <xliff:g id="COUNT">%d</xliff:g> ساعات"</item>
-  </plurals>
   <plurals name="last_num_days">
     <item quantity="other" msgid="3069992808164318268">"آخر <xliff:g id="COUNT">%d</xliff:g> من الأيام"</item>
   </plurals>
     <string name="last_month" msgid="3959346739979055432">"الشهر الماضي"</string>
     <string name="older" msgid="5211975022815554840">"أقدم"</string>
-  <plurals name="num_days_ago">
-    <item quantity="one" msgid="861358534398115820">"أمس"</item>
-    <item quantity="other" msgid="2479586466153314633">"قبل <xliff:g id="COUNT">%d</xliff:g> يوم"</item>
-  </plurals>
-  <plurals name="in_num_seconds">
-    <item quantity="one" msgid="2729745560954905102">"في ثانية واحدة"</item>
-    <item quantity="other" msgid="1241926116443974687">"في <xliff:g id="COUNT">%d</xliff:g> ثانية"</item>
-  </plurals>
-  <plurals name="in_num_minutes">
-    <item quantity="one" msgid="8793095251325200395">"في دقيقة واحدة"</item>
-    <item quantity="other" msgid="3330713936399448749">"في <xliff:g id="COUNT">%d</xliff:g> دقيقة"</item>
-  </plurals>
-  <plurals name="in_num_hours">
-    <item quantity="one" msgid="7164353342477769999">"في ساعة واحدة"</item>
-    <item quantity="other" msgid="547290677353727389">"في <xliff:g id="COUNT">%d</xliff:g> ساعة"</item>
-  </plurals>
-  <plurals name="in_num_days">
-    <item quantity="one" msgid="5413088743009839518">"غدًا"</item>
-    <item quantity="other" msgid="5109449375100953247">"في <xliff:g id="COUNT">%d</xliff:g> يوم"</item>
-  </plurals>
-  <plurals name="abbrev_num_seconds_ago">
-    <item quantity="one" msgid="1849036840200069118">"قبل ثانية واحدة"</item>
-    <item quantity="other" msgid="3699169366650930415">"قبل <xliff:g id="COUNT">%d</xliff:g> ثانية"</item>
-  </plurals>
-  <plurals name="abbrev_num_minutes_ago">
-    <item quantity="one" msgid="6361490147113871545">"قبل دقيقة واحدة"</item>
-    <item quantity="other" msgid="851164968597150710">"قبل <xliff:g id="COUNT">%d</xliff:g> دقيقة"</item>
-  </plurals>
-  <plurals name="abbrev_num_hours_ago">
-    <item quantity="one" msgid="4796212039724722116">"قبل ساعة واحدة"</item>
-    <item quantity="other" msgid="6889970745748538901">"قبل <xliff:g id="COUNT">%d</xliff:g> ساعة"</item>
-  </plurals>
-  <plurals name="abbrev_num_days_ago">
-    <item quantity="one" msgid="8463161711492680309">"أمس"</item>
-    <item quantity="other" msgid="3453342639616481191">"قبل <xliff:g id="COUNT">%d</xliff:g> يوم"</item>
-  </plurals>
-  <plurals name="abbrev_in_num_seconds">
-    <item quantity="one" msgid="5842225370795066299">"في ثانية واحدة"</item>
-    <item quantity="other" msgid="5495880108825805108">"في <xliff:g id="COUNT">%d</xliff:g> ثانية"</item>
-  </plurals>
-  <plurals name="abbrev_in_num_minutes">
-    <item quantity="one" msgid="562786149928284878">"في دقيقة واحدة"</item>
-    <item quantity="other" msgid="4216113292706568726">"في <xliff:g id="COUNT">%d</xliff:g> دقيقة"</item>
-  </plurals>
-  <plurals name="abbrev_in_num_hours">
-    <item quantity="one" msgid="3274708118124045246">"في ساعة واحدة"</item>
-    <item quantity="other" msgid="3705373766798013406">"في <xliff:g id="COUNT">%d</xliff:g> ساعة"</item>
-  </plurals>
-  <plurals name="abbrev_in_num_days">
-    <item quantity="one" msgid="2178576254385739855">"غدًا"</item>
-    <item quantity="other" msgid="2973062968038355991">"في <xliff:g id="COUNT">%d</xliff:g> يوم"</item>
-  </plurals>
     <string name="preposition_for_date" msgid="9093949757757445117">"في <xliff:g id="DATE">%s</xliff:g>"</string>
     <string name="preposition_for_time" msgid="5506831244263083793">"في الساعة <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="preposition_for_year" msgid="5040395640711867177">"في <xliff:g id="YEAR">%s</xliff:g>"</string>
@@ -1375,10 +1310,10 @@
     <string name="sms_short_code_remember_undo_instruction" msgid="4960944133052287484">"‏يمكنك تغيير ذلك لاحقًا من إعدادات &gt; تطبيقات"</string>
     <string name="sms_short_code_confirm_always_allow" msgid="3241181154869493368">"السماح دومًا"</string>
     <string name="sms_short_code_confirm_never_allow" msgid="446992765774269673">"عدم السماح مطلقًا"</string>
-    <string name="sim_removed_title" msgid="6227712319223226185">"‏تمت إزالة بطاقة SIM"</string>
-    <string name="sim_removed_message" msgid="5450336489923274918">"‏لن تكون شبكة الجوّال متوفرة إلى أن تعيد تشغيل الهاتف مع إدخال بطاقة SIM صالحة."</string>
+    <string name="sim_removed_title" msgid="6227712319223226185">"‏تمت إزالة شريحة SIM"</string>
+    <string name="sim_removed_message" msgid="5450336489923274918">"‏لن تكون شبكة الجوّال متوفرة إلى أن تعيد تشغيل الهاتف مع إدخال شريحة SIM صالحة."</string>
     <string name="sim_done_button" msgid="827949989369963775">"تم"</string>
-    <string name="sim_added_title" msgid="3719670512889674693">"‏تمت إضافة بطاقة SIM"</string>
+    <string name="sim_added_title" msgid="3719670512889674693">"‏تمت إضافة شريحة SIM"</string>
     <string name="sim_added_message" msgid="7797975656153714319">"أعد تشغيل جهازك للدخول إلى شبكة الجوّال."</string>
     <string name="sim_restart_button" msgid="4722407842815232347">"إعادة التشغيل"</string>
     <string name="time_picker_dialog_title" msgid="8349362623068819295">"تعيين الوقت"</string>
@@ -1675,14 +1610,14 @@
     <string name="kg_sim_pin_instructions" msgid="2319508550934557331">"‏أدخل رمز PIN لبطاقة SIM"</string>
     <string name="kg_pin_instructions" msgid="2377242233495111557">"‏أدخل رمز PIN"</string>
     <string name="kg_password_instructions" msgid="5753646556186936819">"أدخل كلمة المرور"</string>
-    <string name="kg_puk_enter_puk_hint" msgid="453227143861735537">"‏بطاقة SIM معطلة الآن. أدخل رمز PUK للمتابعة. اتصل بمشغل شبكة الجوال للاطلاع على التفاصيل."</string>
+    <string name="kg_puk_enter_puk_hint" msgid="453227143861735537">"‏شريحة SIM معطلة الآن. أدخل رمز PUK للمتابعة. اتصل بمشغل شبكة الجوال للاطلاع على التفاصيل."</string>
     <string name="kg_puk_enter_pin_hint" msgid="7871604527429602024">"‏إدخال رمز رمز PIN المراد"</string>
     <string name="kg_enter_confirm_pin_hint" msgid="325676184762529976">"‏تأكيد رمز رمز PIN المراد"</string>
-    <string name="kg_sim_unlock_progress_dialog_message" msgid="8950398016976865762">"‏جارٍ إلغاء تأمين بطاقة SIM…"</string>
+    <string name="kg_sim_unlock_progress_dialog_message" msgid="8950398016976865762">"‏جارٍ إلغاء تأمين شريحة SIM…"</string>
     <string name="kg_password_wrong_pin_code" msgid="1139324887413846912">"‏رمز PIN غير صحيح."</string>
     <string name="kg_invalid_sim_pin_hint" msgid="8795159358110620001">"‏اكتب رمز PIN المكون من 4 إلى 8 أرقام."</string>
     <string name="kg_invalid_sim_puk_hint" msgid="6025069204539532000">"‏يجب أن يتكون رمز PUK من 8 أرقام."</string>
-    <string name="kg_invalid_puk" msgid="3638289409676051243">"‏أعد إدخال رمز PUK الصحيح. وستؤدي المحاولات المتكررة إلى تعطيل بطاقة SIM نهائيًا."</string>
+    <string name="kg_invalid_puk" msgid="3638289409676051243">"‏أعد إدخال رمز PUK الصحيح. وستؤدي المحاولات المتكررة إلى تعطيل شريحة SIM نهائيًا."</string>
     <string name="kg_invalid_confirm_pin_hint" product="default" msgid="7003469261464593516">"‏لا يتطابق رمزا رمز PIN"</string>
     <string name="kg_login_too_many_attempts" msgid="6486842094005698475">"محاولات النقش كثيرة جدًا"</string>
     <string name="kg_login_instructions" msgid="1100551261265506448">"‏لإلغاء التأمين، سجّل الدخول بحسابك في Google."</string>

@@ -18,6 +18,8 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include <linux/fb.h>
 #include <sys/ioctl.h>
@@ -30,10 +32,14 @@
 
 #include <ui/PixelFormat.h>
 
+// TODO: Fix Skia.
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 #include <SkImageEncoder.h>
 #include <SkBitmap.h>
 #include <SkData.h>
 #include <SkStream.h>
+#pragma GCC diagnostic pop
 
 using namespace android;
 
@@ -86,6 +92,21 @@ static status_t vinfoToPixelFormat(const fb_var_screeninfo& vinfo,
     return NO_ERROR;
 }
 
+static status_t notifyMediaScanner(const char* fileName) {
+    String8 cmd("am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file://");
+    String8 fileUrl("\"");
+    fileUrl.append(fileName);
+    fileUrl.append("\"");
+    cmd.append(fileName);
+    cmd.append(" > /dev/null");
+    int result = system(cmd.string());
+    if (result < 0) {
+        fprintf(stderr, "Unable to broadcast intent for media scanner.\n");
+        return UNKNOWN_ERROR;
+    }
+    return NO_ERROR;
+}
+
 int main(int argc, char** argv)
 {
     ProcessState::self()->startThreadPool();
@@ -112,10 +133,11 @@ int main(int argc, char** argv)
     argv += optind;
 
     int fd = -1;
+    const char* fn = NULL;
     if (argc == 0) {
         fd = dup(STDOUT_FILENO);
     } else if (argc == 1) {
-        const char* fn = argv[0];
+        fn = argv[0];
         fd = open(fn, O_WRONLY | O_CREAT | O_TRUNC, 0664);
         if (fd == -1) {
             fprintf(stderr, "Error opening file: %s (%s)\n", fn, strerror(errno));
@@ -135,7 +157,7 @@ int main(int argc, char** argv)
     void const* mapbase = MAP_FAILED;
     ssize_t mapsize = -1;
 
-    void const* base = 0;
+    void const* base = NULL;
     uint32_t w, s, h, f;
     size_t size = 0;
 
@@ -172,7 +194,7 @@ int main(int argc, char** argv)
         }
     }
 
-    if (base) {
+    if (base != NULL) {
         if (png) {
             const SkImageInfo info = SkImageInfo::Make(w, h, flinger2skia(f),
                                                        kPremul_SkAlphaType);
@@ -184,6 +206,9 @@ int main(int argc, char** argv)
             SkData* streamData = stream.copyToData();
             write(fd, streamData->data(), streamData->size());
             streamData->unref();
+            if (fn != NULL) {
+                notifyMediaScanner(fn);
+            }
         } else {
             write(fd, &w, 4);
             write(fd, &h, 4);

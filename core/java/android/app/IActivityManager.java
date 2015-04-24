@@ -106,7 +106,8 @@ public interface IActivityManager extends IInterface {
             String resultData, Bundle map, String requiredPermission,
             int appOp, boolean serialized, boolean sticky, int userId) throws RemoteException;
     public void unbroadcastIntent(IApplicationThread caller, Intent intent, int userId) throws RemoteException;
-    public void finishReceiver(IBinder who, int resultCode, String resultData, Bundle map, boolean abortBroadcast) throws RemoteException;
+    public void finishReceiver(IBinder who, int resultCode, String resultData, Bundle map,
+            boolean abortBroadcast, int flags) throws RemoteException;
     public void attachApplication(IApplicationThread app) throws RemoteException;
     public void activityResumed(IBinder token) throws RemoteException;
     public void activityIdle(IBinder token, Configuration config,
@@ -469,6 +470,7 @@ public interface IActivityManager extends IInterface {
     public void notifyEnterAnimationComplete(IBinder token) throws RemoteException;
 
     public void systemBackupRestored() throws RemoteException;
+    public void notifyCleartextNetwork(int uid, byte[] firstPacket) throws RemoteException;
 
     /*
      * Private non-Binder interfaces
@@ -792,4 +794,7 @@ public interface IActivityManager extends IInterface {
     int CHECK_PERMISSION_WITH_TOKEN_TRANSACTION = IBinder.FIRST_CALL_TRANSACTION+241;
     int REGISTER_TASK_STACK_LISTENER_TRANSACTION = IBinder.FIRST_CALL_TRANSACTION+242;
     int SYSTEM_BACKUP_RESTORED = IBinder.FIRST_CALL_TRANSACTION+243;
+
+    // Start of M transactions
+    int NOTIFY_CLEARTEXT_NETWORK_TRANSACTION = IBinder.FIRST_CALL_TRANSACTION+280;
 }

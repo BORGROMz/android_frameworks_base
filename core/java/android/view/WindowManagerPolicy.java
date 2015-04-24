@@ -17,6 +17,7 @@
 package android.view;
 
 import android.annotation.IntDef;
+import android.annotation.SystemApi;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.CompatibilityInfo;
@@ -103,6 +104,13 @@ public interface WindowManagerPolicy {
      * plugged in to HDMI, false if not.
      */
     public final static String EXTRA_HDMI_PLUGGED_STATE = "state";
+
+    /**
+     * Set to {@code true} when intent was invoked from pressing the home key.
+     * @hide
+     */
+    @SystemApi
+    public static final String EXTRA_FROM_HOME_KEY = "android.intent.extra.FROM_HOME_KEY";
 
     /**
      * Pass this event to the user / app.  To be returned from
@@ -901,13 +909,12 @@ public interface WindowManagerPolicy {
 
     /**
      * Called following layout of all window to apply policy to each window.
-     *
+     * 
      * @param win The window being positioned.
-     * @param attrs The LayoutParams of the window.
-     * @param attached For sub-windows, the window it is attached to. Otherwise null.
+     * @param attrs The LayoutParams of the window. 
      */
     public void applyPostLayoutPolicyLw(WindowState win,
-            WindowManager.LayoutParams attrs, WindowState attached);
+            WindowManager.LayoutParams attrs);
 
     /**
      * Called following layout of all windows and after policy has been applied
